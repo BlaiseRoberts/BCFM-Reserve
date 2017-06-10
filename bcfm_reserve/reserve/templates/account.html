@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<h1 class="center-align">My Account</h1>
+<p class="center-align flow-text">for {{profile.user.first_name}} {{profile.user.last_name}}</p>
+<div class="row">
+	<div class="card-panel teal lighten-3 col s6 offset-s3">
+		<h5>First Name 
+			<span class="right">{{profile.user.first_name}}
+			</span>
+		</h5>
+		<h5>Last Name 
+			<span class="right">{{profile.user.last_name}}
+			</span>
+		</h5>
+		<h5>Username 
+			<span class="right">{{profile.user.username}}
+			</span>
+		</h5>
+		<h5>Phone 
+			<span class="right">{{profile.phone}}
+			</span>
+		</h5>
+		<div class="center-align">
+			<a style="margin:1em;" class="btn btn-flat" href="/">Edit Account Info</a>
+		</div>
+	</div>
+</div>
+{%endblock%}

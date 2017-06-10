@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content%}
+		<div class="card-panel blue darken-3 center-align">
+        	<h1>Login to BCFM Reservation</h1>
+		</div>
+		<div class="">
+        <form id="login_form" method="post" action="{% url 'reserve:login' %}">
+            {% csrf_token %}
+            {{ login_form.as_p }}
+            <input class="btn btn-flat"
+             type="submit" value="Submit" />
+        </form>
+        </div>
+{% endblock %}

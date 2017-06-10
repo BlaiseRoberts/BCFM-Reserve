@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content%}
+        <div class="card-panel blue darken-3 center-align">
+            <h1>Register with BCFM</h1>
+        </div>
+        {% if registered %}
+        <div class="text-center">
+            <strong>Thank you for registering!</strong>
+            <a href="{% url 'reserve:index' %}">Return to the homepage.</a>
+            <br>
+        </div>
+        {% else %}
+        <form class="col-xs-4 col-xs-offset-4" id="user_form" 
+        method="post" action="{% url 'reserve:register' %}"
+                enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <div class="text-center">
+                <input style="margin:1em;" class="btn btn-flat" 
+                type="submit" name="submit" 
+                value="Register" />
+            </div>
+        </form>
+        {% endif %}
+{% endblock %}
