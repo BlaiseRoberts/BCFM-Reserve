@@ -96,11 +96,18 @@ class Building (models.Model):
 	Author: Blaise Roberts
 	"""
 	title = models.CharField(max_length=18)
+	space_type = models.ForeignKey(SpaceType, 
+        on_delete=models.CASCADE, related_name="buildings")
 	vacancy_status = models.ForeignKey(VacancyStatus, 
         on_delete=models.CASCADE, related_name="buildings")
-	description = models.CharField(max_length=250, blank=True, null=True)
+	space = models.CharField(max_length=18)
+	parking = models.ForeignKey(Parking, 
+        on_delete=models.CASCADE, related_name="buildings")
+	weekly_access = models.BooleanField()
+	price = models.IntegerField()
+	deposit = models.IntegerField()
 	contact_list = models.ManyToManyField(User, related_name='building_requests')
-	open_access = models.BooleanField()
+
 
 	def __str__(self):
 		return self.title
@@ -126,6 +133,7 @@ class Space (models.Model):
 	space = models.CharField(max_length=10)
 	parking = models.ForeignKey(Parking, 
         on_delete=models.CASCADE, related_name="spaces")
+	price = models.IntegerField
 	likes = models.ManyToManyField(User, related_name='likes')
 	dislikes = models.ManyToManyField(User, related_name='dislikes')
 
