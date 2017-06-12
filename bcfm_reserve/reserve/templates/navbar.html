@@ -5,7 +5,7 @@
     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
     {%if user.is_authenticated%}
-      <li><a href="{% url 'reserve:browse' %}">Browse</a></li>
+      <li><a href="{% url 'reserve:browse' %}">Browse Daily Spaces</a></li>
       <li><a href="{% url 'reserve:my_account' request.user.id %}">My Account</a></li>
       <li><a href="{% url 'reserve:reservation' request.user.id %}">My Reservations</a></li>
       <li><a href="{% url 'reserve:logout' %}">Logout</a></li>

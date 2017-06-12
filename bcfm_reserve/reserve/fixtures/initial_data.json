@@ -1,0 +1,1296 @@
+[
+{
+  "model": "reserve.reservationtype",
+  "pk": 1,
+  "fields": {
+    "label": "Reserved"
+  }
+},
+{
+  "model": "reserve.vacancystatus",
+  "pk": 1,
+  "fields": {
+    "label": "Open"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 1,
+  "fields": {
+    "label": "Barn 9"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 2,
+  "fields": {
+    "label": "Barn 11"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 3,
+  "fields": {
+    "label": "Barn 12"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 4,
+  "fields": {
+    "label": "Barn 14"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 5,
+  "fields": {
+    "label": "Barn 16"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 6,
+  "fields": {
+    "label": "Tree"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 7,
+  "fields": {
+    "label": "Fence"
+  }
+},
+{
+  "model": "reserve.parking",
+  "pk": 1,
+  "fields": {
+    "label": "Parking for 1 Vehicle"
+  }
+},
+{
+  "model": "reserve.parking",
+  "pk": 2,
+  "fields": {
+    "label": "Parking for 1 Vehicle and Trailor"
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 1,
+  "fields": {
+    "title": "Test Building",
+    "space_type": 1,
+    "vacancy_status": 1,
+    "space": "30x20",
+    "parking": 1,
+    "weekly_access": true,
+    "price": 250,
+    "deposit": 100,
+    "contact_list": [
+      1
+    ]
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 1,
+  "fields": {
+    "title": "125",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 2,
+  "fields": {
+    "title": "126",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 3,
+  "fields": {
+    "title": "127",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 4,
+  "fields": {
+    "title": "128",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 5,
+  "fields": {
+    "title": "129",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 6,
+  "fields": {
+    "title": "130",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 7,
+  "fields": {
+    "title": "131",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 8,
+  "fields": {
+    "title": "132",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 9,
+  "fields": {
+    "title": "133",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 10,
+  "fields": {
+    "title": "134",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 11,
+  "fields": {
+    "title": "135",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 12,
+  "fields": {
+    "title": "136",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 13,
+  "fields": {
+    "title": "9a",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 14,
+  "fields": {
+    "title": "9b",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 15,
+  "fields": {
+    "title": "9c",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 16,
+  "fields": {
+    "title": "9d",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 17,
+  "fields": {
+    "title": "9e",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 18,
+  "fields": {
+    "title": "9f",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 19,
+  "fields": {
+    "title": "9g",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 20,
+  "fields": {
+    "title": "9h",
+    "space_type": 1,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 21,
+  "fields": {
+    "title": "149",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 22,
+  "fields": {
+    "title": "150",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 23,
+  "fields": {
+    "title": "151",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 24,
+  "fields": {
+    "title": "152",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 25,
+  "fields": {
+    "title": "153",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 26,
+  "fields": {
+    "title": "154",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 27,
+  "fields": {
+    "title": "155",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 28,
+  "fields": {
+    "title": "156",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 29,
+  "fields": {
+    "title": "157",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 30,
+  "fields": {
+    "title": "158",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 31,
+  "fields": {
+    "title": "159",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 32,
+  "fields": {
+    "title": "160",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 33,
+  "fields": {
+    "title": "11a",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 34,
+  "fields": {
+    "title": "11b",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 35,
+  "fields": {
+    "title": "11c",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 36,
+  "fields": {
+    "title": "11d",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 37,
+  "fields": {
+    "title": "11e",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 38,
+  "fields": {
+    "title": "11f",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 39,
+  "fields": {
+    "title": "11g",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 40,
+  "fields": {
+    "title": "11h",
+    "space_type": 2,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 41,
+  "fields": {
+    "title": "161",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 42,
+  "fields": {
+    "title": "162",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 43,
+  "fields": {
+    "title": "163",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 44,
+  "fields": {
+    "title": "164",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 45,
+  "fields": {
+    "title": "165",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 46,
+  "fields": {
+    "title": "166",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 47,
+  "fields": {
+    "title": "167",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 48,
+  "fields": {
+    "title": "168",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 49,
+  "fields": {
+    "title": "169",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 50,
+  "fields": {
+    "title": "170",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 51,
+  "fields": {
+    "title": "171",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 52,
+  "fields": {
+    "title": "172",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 53,
+  "fields": {
+    "title": "173",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 54,
+  "fields": {
+    "title": "174",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 55,
+  "fields": {
+    "title": "175",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 56,
+  "fields": {
+    "title": "176",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 57,
+  "fields": {
+    "title": "177",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 58,
+  "fields": {
+    "title": "178",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 59,
+  "fields": {
+    "title": "179",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 60,
+  "fields": {
+    "title": "180",
+    "space_type": 3,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 61,
+  "fields": {
+    "title": "181",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 62,
+  "fields": {
+    "title": "182",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 63,
+  "fields": {
+    "title": "183",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 64,
+  "fields": {
+    "title": "184",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 65,
+  "fields": {
+    "title": "185",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 66,
+  "fields": {
+    "title": "186",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 67,
+  "fields": {
+    "title": "187",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 68,
+  "fields": {
+    "title": "188",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 69,
+  "fields": {
+    "title": "189",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 70,
+  "fields": {
+    "title": "190",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 71,
+  "fields": {
+    "title": "191",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 72,
+  "fields": {
+    "title": "192",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 73,
+  "fields": {
+    "title": "193",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 74,
+  "fields": {
+    "title": "194",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 75,
+  "fields": {
+    "title": "195",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 76,
+  "fields": {
+    "title": "196",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 77,
+  "fields": {
+    "title": "197",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 78,
+  "fields": {
+    "title": "198",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 79,
+  "fields": {
+    "title": "199",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 80,
+  "fields": {
+    "title": "200",
+    "space_type": 4,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 81,
+  "fields": {
+    "title": "213",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 82,
+  "fields": {
+    "title": "214",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 83,
+  "fields": {
+    "title": "215",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 84,
+  "fields": {
+    "title": "216",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 85,
+  "fields": {
+    "title": "217",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 86,
+  "fields": {
+    "title": "218",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 87,
+  "fields": {
+    "title": "219",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 88,
+  "fields": {
+    "title": "220",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 89,
+  "fields": {
+    "title": "221",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 90,
+  "fields": {
+    "title": "222",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 91,
+  "fields": {
+    "title": "223",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 92,
+  "fields": {
+    "title": "224",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 93,
+  "fields": {
+    "title": "225",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 94,
+  "fields": {
+    "title": "226",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 95,
+  "fields": {
+    "title": "227",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 96,
+  "fields": {
+    "title": "228",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 97,
+  "fields": {
+    "title": "16a",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 98,
+  "fields": {
+    "title": "16b",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 99,
+  "fields": {
+    "title": "16c",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 100,
+  "fields": {
+    "title": "16d",
+    "space_type": 5,
+    "tables": 2,
+    "space": "10x10",
+    "parking": 1,
+    "price": 12
+  }
+}
+]

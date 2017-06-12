@@ -133,7 +133,7 @@ class Space (models.Model):
 	space = models.CharField(max_length=10)
 	parking = models.ForeignKey(Parking, 
         on_delete=models.CASCADE, related_name="spaces")
-	price = models.IntegerField
+	price = models.IntegerField(default=10)
 	likes = models.ManyToManyField(User, related_name='likes')
 	dislikes = models.ManyToManyField(User, related_name='dislikes')
 
@@ -152,9 +152,7 @@ class Reservation (models.Model):
 	space = models.ForeignKey(Space, 
         on_delete=models.CASCADE, related_name="reservations")
 	date = models.DateField()
-	status = models.ForeignKey(VacancyStatus, 
-        on_delete=models.CASCADE, related_name="reservations")
-	reservation_types = models.ManyToManyField(ReservationType, related_name='reservations')
+	reservation_type = models.ForeignKey(ReservationType, related_name='reservations')
 
 	def __str__(self):
 		return "Reservation for {} by {} {} on {}".format(self.space.title, self.customer.first_name, self.customer.last_name, self.date)

@@ -23,6 +23,16 @@
 	<script type="text/javascript">
     	$( document ).ready(function(){
       	$(".button-collapse").sideNav();
+      	$('.materialboxed').materialbox();
+      	$('.datepicker').pickadate({
+    		selectMonths: true,
+    		selectYears: 1, 
+    		disable: [
+			    2,3,4,5,6
+			  ],
+			format: 'yyyy-mm-dd',
+			closeOnSelect: true
+  });
     })
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>

@@ -19,12 +19,45 @@ def index(request):
 		return render(request, template_name, {})
 
 def browse(request):
+	if request.method == 'GET':
+		form_data = request.GET
+		all_spaces = Space.objects.all()
+		spaces = []
+		date = ""
+		if form_data:
+			date = form_data['date_picker']
+			if date == "":
+				error = "Please Select a Date"
+				template_name = 'browse.html'
+				return render(request, template_name, {'spaces':spaces, 'date':date, 'error':error})
+			else:
+				for space in all_spaces:
+					reservations = space.reservations.filter(date=date)
+					if reservations:
+						status = reservations[0].reservation_type
+						space.status = status
+					else:
+						space.status = 'Open'
+					spaces.append(space)
+
+		template_name = 'browse.html'
+
+		return render(request, template_name, {'spaces':spaces, 'date':date})
+
+def space_details(request, space_id, date):
 	if request.method == 'POST':
 		pass
 	elif request.method == 'GET':
-		template_name = 'browse.html'
+		space = Space.objects.get(pk=space_id)
+		reservations = space.reservations.filter(date=date)
+		if reservations:
+			status = reservations[0].reservation_type
+			space.status = status
+		else:
+			space.status = 'Open'
+		template_name = 'space_detail.html'
 
-		return render(request, template_name, {})
+		return render(request, template_name, {'space':space})
 
 def account(request, user_id):
 	if request.method == 'POST':
