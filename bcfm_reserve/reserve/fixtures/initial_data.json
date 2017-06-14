@@ -2250,7 +2250,7 @@
 },
 {
   "model": "reserve.space",
-  "pk": 143,
+  "pk": 148,
   "fields": {
     "title": "E7",
     "space_type": 9,
@@ -2258,6 +2258,313 @@
     "space": "20x30",
     "parking": 2,
     "price": 15,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 149,
+  "fields": {
+    "title": "A4",
+    "space_type": 6,
+    "tables": 3,
+    "space": "12x15",
+    "parking": 2,
+    "price": 16,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 150,
+  "fields": {
+    "title": "A5",
+    "space_type": 6,
+    "tables": 3,
+    "space": "12x15",
+    "parking": 2,
+    "price": 16,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 151,
+  "fields": {
+    "title": "A6",
+    "space_type": 6,
+    "tables": 2,
+    "space": "12x15",
+    "parking": 1,
+    "price": 14,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 152,
+  "fields": {
+    "title": "A7",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 2,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 153,
+  "fields": {
+    "title": "A8",
+    "space_type": 6,
+    "tables": 3,
+    "space": "12x15",
+    "parking": 2,
+    "price": 16,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 154,
+  "fields": {
+    "title": "A9",
+    "space_type": 6,
+    "tables": 2,
+    "space": "12x15",
+    "parking": 1,
+    "price": 14,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 155,
+  "fields": {
+    "title": "A10",
+    "space_type": 6,
+    "tables": 4,
+    "space": "12x15",
+    "parking": 2,
+    "price": 18,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 156,
+  "fields": {
+    "title": "A11",
+    "space_type": 6,
+    "tables": 4,
+    "space": "12x15",
+    "parking": 2,
+    "price": 18,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 157,
+  "fields": {
+    "title": "A12",
+    "space_type": 6,
+    "tables": 2,
+    "space": "12x15",
+    "parking": 2,
+    "price": 16,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 158,
+  "fields": {
+    "title": "A13",
+    "space_type": 6,
+    "tables": 2,
+    "space": "12x15",
+    "parking": 2,
+    "price": 14,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 159,
+  "fields": {
+    "title": "A23",
+    "space_type": 6,
+    "tables": 3,
+    "space": "12x15",
+    "parking": 2,
+    "price": 16,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 160,
+  "fields": {
+    "title": "A24",
+    "space_type": 6,
+    "tables": 2,
+    "space": "12x15",
+    "parking": 2,
+    "price": 14,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 161,
+  "fields": {
+    "title": "A25",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 1,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},{
+  "model": "reserve.space",
+  "pk": 162,
+  "fields": {
+    "title": "A26",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 1,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 163,
+  "fields": {
+    "title": "A26",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 1,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 164,
+  "fields": {
+    "title": "A27",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 1,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 165,
+  "fields": {
+    "title": "A28",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 1,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 166,
+  "fields": {
+    "title": "A29",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 2,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 167,
+  "fields": {
+    "title": "A30",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 2,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 168,
+  "fields": {
+    "title": "A31",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 2,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 169,
+  "fields": {
+    "title": "A32",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 2,
+    "price": 12,
+    "likes": [],
+    "dislikes": []
+  }
+},
+{
+  "model": "reserve.space",
+  "pk": 170,
+  "fields": {
+    "title": "A33",
+    "space_type": 6,
+    "tables": 0,
+    "space": "12x15",
+    "parking": 2,
+    "price": 12,
     "likes": [],
     "dislikes": []
   }
