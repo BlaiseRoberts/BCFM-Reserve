@@ -21,55 +21,100 @@
 	<p class="flow-text center-align">{{error}}</p>
 	{%else%}
 	<p class="flow-text center-align">Showing Results for '{{date}}'</p>
-	<div class="col s5 card-panel teal">
-		<p class="flow-text center-align">Barn 9</p>
-		<div class="collection">
-			{%for space in spaces%}
-				{%if space.space_type.label == "Barn 9"%}
-	        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
-				
-				{%endif%}
-	        {%endfor%}
-      	</div>
-      	<p class="flow-text center-align">Barn 11</p>
-		<div class="collection">
-			{%for space in spaces%}
-				{%if space.space_type.label == "Barn 11"%}
-	        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
-				
-				{%endif%}
-	        {%endfor%}
-      	</div>
-      	<p class="flow-text center-align">Barn 12</p>
-		<div class="collection">
-			{%for space in spaces%}
-				{%if space.space_type.label == "Barn 12"%}
-	        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
-				
-				{%endif%}
-	        {%endfor%}
-      	</div>
-      	<p class="flow-text center-align">Barn 14</p>
-		<div class="collection">
-			{%for space in spaces%}
-				{%if space.space_type.label == "Barn 14"%}
-	        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
-				
-				{%endif%}
-	        {%endfor%}
-      	</div>
-      	<p class="flow-text center-align">Barn 16</p>
-		<div class="collection">
-			{%for space in spaces%}
-				{%if space.space_type.label == "Barn 16"%}
-	        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
-				
-				{%endif%}
-	        {%endfor%}
-      	</div>
-            
-        {%endif%}
-	</div>
+	<div class="col s12 card-panel teal">
+		<ul class="collapsible popout" data-collapsible="accordion">
+			<li>
+			<div class="collapsible-header flow-text center-align">Barn 9</div>
+			<div class="collapsible-body collection teal lighten-4">
+				{%for space in spaces%}
+					{%if space.space_type.pk == 1%}
+		        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+					{%endif%}
+		        {%endfor%}
+	      	</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align">Barn 11</div>
+	      		<div class="collapsible-body collection teal lighten-4">
+					{%for space in spaces%}
+						{%if space.space_type.pk == 2%}
+			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%endif%}
+			        {%endfor%}
+		      	</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align">Barn 12</div>
+	      		<div class="collapsible-body collection teal lighten-4">
+					{%for space in spaces%}
+						{%if space.space_type.pk == 3%}
+			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%endif%}
+					{%endfor%}
+      			</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align">Barn 14</div>
+	      		<div class="collapsible-body collection teal lighten-4">
+					{%for space in spaces%}
+						{%if space.space_type.pk == 4%}
+			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%endif%}
+			        {%endfor%}
+		      	</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align">Barn 16</div>
+	      		<div class="collapsible-body collection teal lighten-4">
+					{%for space in spaces%}
+						{%if space.space_type.pk == 5%}
+			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%endif%}
+			        {%endfor%}
+		      	</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align">Tree Spots</div>
+	      		<div class="collapsible-body collection teal lighten-4">
+					{%for space in spaces%}
+						{%if space.space_type.pk == 6%}
+			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%endif%}
+			        {%endfor%}
+		      	</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align">Fence Spots</div>
+	      		<div class="collection collapsible-body teal lighten-4">
+					{%for space in spaces%}
+						{%if space.space_type.pk == 7%}
+			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%endif%}
+			        {%endfor%}
+		      	</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align">Barn 3</div>
+	      		<div class="collection collapsible-body teal lighten-4">
+					{%for space in spaces%}
+						{%if space.space_type.pk == 8%}
+			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%endif%}
+			        {%endfor%}
+		      	</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align">Uncovered Outside Spots</div>
+	      		<div class="collection collapsible-body teal lighten-4">
+					{%for space in spaces%}
+						{%if space.space_type.pk == 9%}
+			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%endif%}
+			        {%endfor%}
+		      	</div>
+	      	</li>
+		</ul>
+    </div>
 </div>
-
+	{%endif%}
 {%endblock%}
