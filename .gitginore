@@ -1,0 +1,15 @@
+node_modules
+bower_components
+__pycache__
+*.pyc
+bin
+obj
+*.db
+*.sqlite3
+
+*.DS_Store
+
+
+migrations/
+settings.py
+.DS_Store
