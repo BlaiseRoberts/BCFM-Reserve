@@ -22,19 +22,18 @@
 
 <h1 class="center-align">Space {{space.title}} in {{space.space_type}}</h1>
 <p class="flow-text center-align">on {{date}}</p>
-<div class="center-align card-panel teal lighten-4">
-	<p>{{space.status}}</p>
-	<p>Tables:  {{space.tables}}</p>
-	<p>Space:  {{space.space}}</p>
-	<p>Price:  {{space.price}}</p>
-	<p>Parking:  {{space.parking}}</p>
-
+<div class="row">
+	<div class="card-panel teal lighten-4 col s6 offset-s3">
+		<p class="center-align flow-text">{{space.status}}</p>
+		<p>Tables:  {{space.tables}}</p>
+		<p>Space:  {{space.space}}</p>
+		<p>Price:  {{space.price}}</p>
+		<p>Parking:  {{space.parking}}</p>
+	{%if space.status == "Open"%}
+		  <div class="right-align">
+		  <a style="margin:1rem;" class="modal-trigger waves-effect waves-light btn btn-flat" href="#reservationModal">Reserve</a>
+		  </div>
+	{%endif%}
+	</div>
 </div>
-{%if space.status == "Open"%}
-<div class="col s5">
-	  <div class="center-align">
-	  <a class="modal-trigger waves-effect waves-light btn btn-flat" href="#reservationModal">Reserve</div>
-	  </div>
-</div>
-{%endif%}
 {%endblock%}

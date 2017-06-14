@@ -52,7 +52,7 @@ class VacancyStatus (models.Model):
 	----Methods----
 	Author: Blaise Roberts
 	"""
-	label = models.CharField(max_length=18)
+	label = models.CharField(max_length=50)
 
 	def __str__(self):
 		return self.label
@@ -65,7 +65,7 @@ class SpaceType (models.Model):
 	----Methods----
 	Author: Blaise Roberts
 	"""
-	label = models.CharField(max_length=18)
+	label = models.CharField(max_length=50)
 
 	def __str__(self):
 		return self.label
@@ -155,4 +155,4 @@ class Reservation (models.Model):
 	reservation_type = models.ForeignKey(ReservationType, related_name='reservations')
 
 	def __str__(self):
-		return "Reserved by {} {}".format(self.customer.first_name, self.customer.last_name, self.date)
+		return "{} {} by {} {}".format(self.space, self.reservation_type, self.customer.first_name, self.customer.last_name, self.date)

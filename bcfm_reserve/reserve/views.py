@@ -15,6 +15,11 @@ def index(request):
 
 	return render(request, template_name, {})
 
+def rules(request):
+	template_name = 'rules.html'
+
+	return render(request, template_name, {})
+
 def browse(request):
 	if request.method == 'GET':
 		form_data = request.GET
@@ -29,7 +34,7 @@ def browse(request):
 				return render(request, template_name, {'spaces':spaces, 'date':date, 'error':error})
 			else:
 				for space in all_spaces:
-					reservations = space.reservations.filter(date=date)
+					reservations = space.reservations.filter(date=date, reservation_type_id=1)
 					if reservations:
 						status = reservations[0]
 						space.status = status
@@ -44,20 +49,31 @@ def browse(request):
 def space_details(request, space_id, date):
 	if request.method == 'POST':
 		space = Space.objects.get(pk=space_id)
-		reservation_type = ReservationType.objects.get(label="Reserved")
-		r = Reservation(
-			customer = request.user
-		)
-		r.space = space
-		r.date = date
-		r.reservation_type = reservation_type
-		r.save()
-		return HttpResponseRedirect(reverse('reserve:space', 
-                args=[r.space.id, date]))
+		reservation_type = ReservationType.objects.get(pk=1)
+		try:
+			r = Reservation.objects.get(space_id=space_id, date=date, customer=request.user)
+			r.reservation_type = reservation_type
+			r.save()
+			space.dislikes.clear()
+			space.likes.add(request.user)
+			return HttpResponseRedirect(reverse('reserve:space', 
+	                args=[r.space.id, date]))
+		except:
+			r = Reservation(
+				customer = request.user
+			)
+			r.space = space
+			r.date = date
+			r.reservation_type = reservation_type
+			r.save()
+			space.dislikes.clear()
+			space.likes.add(request.user)
+			return HttpResponseRedirect(reverse('reserve:space', 
+	                args=[r.space.id, date]))
 
 	elif request.method == 'GET':
 		space = Space.objects.get(pk=space_id)
-		reservations = space.reservations.filter(date=date)
+		reservations = space.reservations.filter(date=date, reservation_type_id=1)
 		if reservations:
 			status = reservations[0]
 			space.status = status
@@ -70,7 +86,6 @@ def space_details(request, space_id, date):
 def account(request, user_id):
 		profile = Profile.objects.get(user_id=user_id)
 		template_name = 'account.html'
-
 		return render(request, template_name, {'profile':profile})
 
 def edit_account(request, user_id):
@@ -109,15 +124,15 @@ def reservation(request, user_id):
 		pass
 	elif request.method == 'GET':
 		reservations = Reservation.objects.filter(customer_id=user_id).order_by('date')
-
 		template_name = 'reservation.html'
-
 		return render(request, template_name, {'reservations':reservations})
 
 def delete_reservation(request, reservation_id, date):
 	r = Reservation.objects.get(pk=reservation_id, date=date)
+	reservation_type = ReservationType.objects.get(pk=2)
 	if request.user == r.customer:
-		r.delete()
+		r.reservation_type = reservation_type
+		r.save()
 		return HttpResponseRedirect(reverse('reserve:reservation', 
             args=[request.user.id]))
 	else:
@@ -163,7 +178,6 @@ def register(request):
             # Update our variable to tell the template 
             # registration was successful.
             registered = True
-
         return login_user(request)
 
     elif request.method == 'GET':

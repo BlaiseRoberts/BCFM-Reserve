@@ -8,11 +8,13 @@
       <li><a href="{% url 'reserve:browse' %}">Browse Daily Spaces</a></li>
       <li><a href="{% url 'reserve:my_account' request.user.id %}">My Account</a></li>
       <li><a href="{% url 'reserve:reservation' request.user.id %}">My Reservations</a></li>
+      <li><a href="{% url 'reserve:rules' %}">Rules</a></li>
       <li><a href="{% url 'reserve:logout' %}">Logout</a></li>
     {%else%}
       <li><a href="{% url 'reserve:login'  %}">Login</a></li>
       <li><a href="{% url 'reserve:register' %}">Register</a></li>
-      <li><a href="{% url 'reserve:browse' %}">Browse</a></li>
+      <li><a href="{% url 'reserve:rules' %}">Rules</a></li>
+      <li><a href="{% url 'reserve:browse' %}">Browse Daily Spaces</a></li>
     {%endif%}
     </ul>
   </div>
