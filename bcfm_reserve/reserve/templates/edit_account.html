@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<h1 class="center-align">My Account</h1>
+<div class="row">
+	<div class="card-panel cyan lighten-4 col s6 offset-s3">
+		<form id="user_form" method="post" 
+		enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <div class="center-align">
+                <input style="margin:1em;" class="btn btn-flat" 
+                type="submit" name="submit" 
+                value="Edit Account" />
+            </div>
+        </form>
+	</div>
+</div>
+{%endblock%}

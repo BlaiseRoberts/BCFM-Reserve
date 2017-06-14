@@ -12,8 +12,9 @@ urlpatterns = [
     url(r'^browse$', views.browse, name='browse'),
     url(r'^space/(?P<space_id>[0-9]+)/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', views.space_details, name='space'),
     url(r'^myaccount/(?P<user_id>[0-9]+)/$', views.account, name='my_account'),
-    url(r'^edit_myaccount/(?P<user_id>[0-9]+)/$', views.account, name='my_account'),
+    url(r'^edit_myaccount/(?P<user_id>[0-9]+)/$', views.edit_account, name='edit_account'),
     url(r'^myreservations/(?P<user_id>[0-9]+)/$', views.reservation, name='reservation'),
+    url(r'^delete_reservation/(?P<reservation_id>[0-9]+)/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', views.delete_reservation, name='delete_reservation'),
 ]
 
 if settings.DEBUG:

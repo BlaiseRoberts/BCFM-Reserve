@@ -8,7 +8,7 @@
 		<img class="materialboxed" width="200px" src="/images/flea-map.png">
 	</div>
 	<div class="col s5">
-		<form type="get" action= "{% url 'reserve:browse' %}">
+		<form method="GET" action= "{% url 'reserve:browse' %}">
 		  <div class="form-group">
 		    <input class="datepicker" name="date_picker" id="date_picker" type="date" placeholder="Please choose a date">
 		  </div>

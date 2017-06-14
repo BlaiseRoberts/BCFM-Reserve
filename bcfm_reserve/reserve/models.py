@@ -155,4 +155,4 @@ class Reservation (models.Model):
 	reservation_type = models.ForeignKey(ReservationType, related_name='reservations')
 
 	def __str__(self):
-		return "Reservation for {} by {} {} on {}".format(self.space.title, self.customer.first_name, self.customer.last_name, self.date)
+		return "Reserved by {} {}".format(self.customer.first_name, self.customer.last_name, self.date)

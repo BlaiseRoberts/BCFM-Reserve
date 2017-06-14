@@ -1,10 +1,40 @@
 {%extends 'base.html'%}
 
 {%block content%}
+ <div id="reservationModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h3 class="modal-header">Reserve {{space.title}}</h3>
+      <div class="row">
+		<div class="input-field col s12">
+			<p class="flow-text">Are you sure you would like to reserve {{space.title}} on {{date}}?  (You reservation will be held untill 9am on the date of your reservation)</p>
+		</div>
+      </div>	
+    </div>
+	<div class="modal-footer">
+		<form method="POST" action= "">
+		  {% csrf_token %}
+		  <div class="center-align">
+		  <input class="btn btn-flat modal-action modal-close" type="submit" value="Confirm Reservation"/>
+		  </div>
+		</form>
+	</div>
+  </div>
+
 <h1 class="center-align">Space {{space.title}} in {{space.space_type}}</h1>
-<p>{{space.status}}</p>
-<p>Tables:  {{space.tables}}</p>
-<p>Space:  {{space.space}}</p>
-<p>Price:  {{space.price}}</p>
-<p>Parking:  {{space.parking}}</p>
+<p class="flow-text center-align">on {{date}}</p>
+<div class="center-align card-panel teal lighten-4">
+	<p>{{space.status}}</p>
+	<p>Tables:  {{space.tables}}</p>
+	<p>Space:  {{space.space}}</p>
+	<p>Price:  {{space.price}}</p>
+	<p>Parking:  {{space.parking}}</p>
+
+</div>
+{%if space.status == "Open"%}
+<div class="col s5">
+	  <div class="center-align">
+	  <a class="modal-trigger waves-effect waves-light btn btn-flat" href="#reservationModal">Reserve</div>
+	  </div>
+</div>
+{%endif%}
 {%endblock%}

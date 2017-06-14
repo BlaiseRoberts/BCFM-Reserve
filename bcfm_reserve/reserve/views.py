@@ -5,18 +5,15 @@ from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-from reserve.forms import UserForm, LoginForm, ProfileForm
+from reserve.forms import UserForm, LoginForm, ProfileForm, EditUserForm
 from .models import Reservation, Space, Building, SpaceType,\
 ReservationType, VacancyStatus, Parking, Profile
 
 
 def index(request):
-	if request.method == 'POST':
-		pass
-	elif request.method == 'GET':
-		template_name = 'index.html'
+	template_name = 'index.html'
 
-		return render(request, template_name, {})
+	return render(request, template_name, {})
 
 def browse(request):
 	if request.method == 'GET':
@@ -34,7 +31,7 @@ def browse(request):
 				for space in all_spaces:
 					reservations = space.reservations.filter(date=date)
 					if reservations:
-						status = reservations[0].reservation_type
+						status = reservations[0]
 						space.status = status
 					else:
 						space.status = 'Open'
@@ -46,35 +43,85 @@ def browse(request):
 
 def space_details(request, space_id, date):
 	if request.method == 'POST':
-		pass
+		space = Space.objects.get(pk=space_id)
+		reservation_type = ReservationType.objects.get(label="Reserved")
+		r = Reservation(
+			customer = request.user
+		)
+		r.space = space
+		r.date = date
+		r.reservation_type = reservation_type
+		r.save()
+		return HttpResponseRedirect(reverse('reserve:space', 
+                args=[r.space.id, date]))
+
 	elif request.method == 'GET':
 		space = Space.objects.get(pk=space_id)
 		reservations = space.reservations.filter(date=date)
 		if reservations:
-			status = reservations[0].reservation_type
+			status = reservations[0]
 			space.status = status
 		else:
 			space.status = 'Open'
 		template_name = 'space_detail.html'
 
-		return render(request, template_name, {'space':space})
+		return render(request, template_name, {'space':space, 'date':date})
 
 def account(request, user_id):
-	if request.method == 'POST':
-		pass
-	elif request.method == 'GET':
 		profile = Profile.objects.get(user_id=user_id)
 		template_name = 'account.html'
 
 		return render(request, template_name, {'profile':profile})
 
+def edit_account(request, user_id):
+	if request.method == 'POST':
+		user_form = EditUserForm(request.POST)
+		profile_form = ProfileForm(request.POST)
+		if user_form.is_valid() and profile_form.is_valid():
+			updated_user = request.user
+			updated_user.first_name = user_form.cleaned_data['first_name']
+			updated_user.last_name = user_form.cleaned_data['last_name']
+			updated_user.email = user_form.cleaned_data['email']
+			updated_user.save()
+
+			updated_account = Profile.objects.get(user=request.user)
+			updated_account.phone = profile_form.cleaned_data['phone']
+			updated_account.save()
+
+			return HttpResponseRedirect(reverse('reserve:my_account',
+			    args=[request.user.id]))
+		else:
+			print(user_form.is_valid())
+			print(profile_form.is_valid())
+			print("FAIL")
+			return HttpResponseRedirect(reverse('reserve:my_account',
+			    args=[request.user.id]))
+
+	elif request.method == 'GET':
+		profile = Profile.objects.get(user_id=user_id)
+		user_form = EditUserForm(instance=profile.user)
+		profile_form = ProfileForm(instance=profile)
+		template_name = 'edit_account.html'
+		return render(request, template_name, {'user_form':user_form,'profile_form':profile_form})
+
 def reservation(request, user_id):
 	if request.method == 'POST':
 		pass
 	elif request.method == 'GET':
+		reservations = Reservation.objects.filter(customer_id=user_id).order_by('date')
+
 		template_name = 'reservation.html'
 
-		return render(request, template_name, {})
+		return render(request, template_name, {'reservations':reservations})
+
+def delete_reservation(request, reservation_id, date):
+	r = Reservation.objects.get(pk=reservation_id, date=date)
+	if request.user == r.customer:
+		r.delete()
+		return HttpResponseRedirect(reverse('reserve:reservation', 
+            args=[request.user.id]))
+	else:
+		return HttpResponseForbidden('''<h1>Not your reservation, bruh!</h1>''')
 
 
 def register(request):

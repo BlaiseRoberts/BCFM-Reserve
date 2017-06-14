@@ -23,7 +23,21 @@ class UserForm(forms.ModelForm):
         help_texts = {
             'username':None,
         }
-        fields = ('username', 'email', 'password', 'first_name', 'last_name',)
+        fields = ( 'first_name', 'last_name', 'username', 'email', 'password',)
+
+class EditUserForm(forms.ModelForm):
+    """
+    This class represents an HTML form to login and authenticate users.
+    ----Fields----
+    - email
+    - first_name
+    - last_name
+    Author: Beve Strownlee
+    """
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email',)
 
 class ProfileForm(forms.ModelForm):
     """

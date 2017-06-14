@@ -11,13 +11,13 @@
             <br>
         </div>
         {% else %}
-        <form class="col-xs-4 col-xs-offset-4" id="user_form" 
+        <form id="user_form" 
         method="post" action="{% url 'reserve:register' %}"
                 enctype="multipart/form-data">
             {% csrf_token %}
             {{ user_form.as_p }}
             {{ profile_form.as_p }}
-            <div class="text-center">
+            <div class="center-align">
                 <input style="margin:1em;" class="btn btn-flat" 
                 type="submit" name="submit" 
                 value="Register" />
