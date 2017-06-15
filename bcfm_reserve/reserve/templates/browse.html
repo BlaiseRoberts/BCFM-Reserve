@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+{%load browse_tags%}
 
 {%block content%}
 <h1 class="center-align">Browse Daily Spaces</h1>
@@ -20,11 +21,12 @@
 	{%if error%}
 	<p class="flow-text center-align">{{error}}</p>
 	{%else%}
+	{%if date%}
 	<p class="flow-text center-align">Showing Results for '{{date}}'</p>
 	<div class="col s12 card-panel teal">
 		<ul class="collapsible popout" data-collapsible="accordion">
 			<li>
-			<div class="collapsible-header flow-text center-align">Barn 9</div>
+			<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date 1%}</span>Barn 9</div>
 			<div class="collapsible-body collection teal lighten-4">
 				{%for space in spaces%}
 					{%if space.space_type.pk == 1%}
@@ -34,7 +36,7 @@
 	      	</div>
 	      	</li>
 	      	<li>
-	      		<div class="collapsible-header flow-text center-align">Barn 11</div>
+	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date 2%}</span>Barn 11</div>
 	      		<div class="collapsible-body collection teal lighten-4">
 					{%for space in spaces%}
 						{%if space.space_type.pk == 2%}
@@ -44,7 +46,7 @@
 		      	</div>
 	      	</li>
 	      	<li>
-	      		<div class="collapsible-header flow-text center-align">Barn 12</div>
+	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date 3%}</span>Barn 12</div>
 	      		<div class="collapsible-body collection teal lighten-4">
 					{%for space in spaces%}
 						{%if space.space_type.pk == 3%}
@@ -54,7 +56,7 @@
       			</div>
 	      	</li>
 	      	<li>
-	      		<div class="collapsible-header flow-text center-align">Barn 14</div>
+	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date 4%}</span>Barn 14</div>
 	      		<div class="collapsible-body collection teal lighten-4">
 					{%for space in spaces%}
 						{%if space.space_type.pk == 4%}
@@ -64,7 +66,7 @@
 		      	</div>
 	      	</li>
 	      	<li>
-	      		<div class="collapsible-header flow-text center-align">Barn 16</div>
+	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date 5%}</span>Barn 16</div>
 	      		<div class="collapsible-body collection teal lighten-4">
 					{%for space in spaces%}
 						{%if space.space_type.pk == 5%}
@@ -74,7 +76,7 @@
 		      	</div>
 	      	</li>
 	      	<li>
-	      		<div class="collapsible-header flow-text center-align">Tree Spots</div>
+	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date 6%}</span>Outside Spots</div>
 	      		<div class="collapsible-body collection teal lighten-4">
 					{%for space in spaces%}
 						{%if space.space_type.pk == 6%}
@@ -84,7 +86,7 @@
 		      	</div>
 	      	</li>
 	      	<li>
-	      		<div class="collapsible-header flow-text center-align">Fence Spots</div>
+	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date 7%}</span>Fence Spots</div>
 	      		<div class="collection collapsible-body teal lighten-4">
 					{%for space in spaces%}
 						{%if space.space_type.pk == 7%}
@@ -94,7 +96,7 @@
 		      	</div>
 	      	</li>
 	      	<li>
-	      		<div class="collapsible-header flow-text center-align">Barn 3</div>
+	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date 8%}</span>Barn 3</div>
 	      		<div class="collection collapsible-body teal lighten-4">
 					{%for space in spaces%}
 						{%if space.space_type.pk == 8%}
@@ -103,18 +105,13 @@
 			        {%endfor%}
 		      	</div>
 	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align">Uncovered Outside Spots</div>
-	      		<div class="collection collapsible-body teal lighten-4">
-					{%for space in spaces%}
-						{%if space.space_type.pk == 9%}
-			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
-						{%endif%}
-			        {%endfor%}
-		      	</div>
-	      	</li>
 		</ul>
     </div>
-</div>
+    {%else%}
+    <div class="card-panel teal lighten-4">
+    	<p class="flow-text center-align">Select a date to search!</p>
+    </div>
+    {%endif%}
 	{%endif%}
+</div>
 {%endblock%}

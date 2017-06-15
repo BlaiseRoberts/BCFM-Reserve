@@ -15,7 +15,7 @@ class Profile (models.Model):
 	"""
 
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	phone = models.CharField(max_length=18, blank=True, null=True)
+	phone = models.CharField(max_length=18)
 
 	def __str__(self):
 		return self.user.first_name + " " + self.user.last_name

@@ -1,6 +1,6 @@
 from django.template import RequestContext
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,7 @@ from reserve.forms import UserForm, LoginForm, ProfileForm, EditUserForm
 from .models import Reservation, Space, Building, SpaceType,\
 ReservationType, VacancyStatus, Parking, Profile
 
+import datetime
 
 def index(request):
 	template_name = 'index.html'
@@ -20,27 +21,49 @@ def rules(request):
 
 	return render(request, template_name, {})
 
-def browse(request):
+def buildings(request):
+	template_name = 'buildings.html'
+
+	return render(request, template_name, {})
+
+def browse(request, date=None):
 	if request.method == 'GET':
 		form_data = request.GET
 		all_spaces = Space.objects.all()
 		spaces = []
-		date = ""
-		if form_data:
-			date = form_data['date_picker']
-			if date == "":
-				error = "Please Select a Date"
-				template_name = 'browse.html'
-				return render(request, template_name, {'spaces':spaces, 'date':date, 'error':error})
+		if date:
+			date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
+			if date > str(datetime.date.today()+datetime.timedelta(days=21\
+					)) or date_time.isoweekday() in range(1, 6):
+				error = "Outside Date Range"
+				error_details = "You can not reserve spaces on a weekday\
+				and you can not reserve spaces more than 3 weeks ahead."
+				template_name = 'error.html'
+
+				return render(request, template_name, {'error':error, 
+					'error_details':error_details})
+			pass
+		else:
+			if form_data:
+				date = form_data['date_picker']
+				date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
+				if date > str(datetime.date.today()+datetime.timedelta(days=21\
+					)) or date_time.isoweekday() in range(1, 6):
+					error = "Outside Date Range"
+					error_details = "You can not reserve spaces on a weekday\
+					and you can not reserve spaces more than 3 weeks ahead."
+					template_name = 'error.html'
+
+					return render(request, template_name, {'error':error, 
+						'error_details':error_details})
+		for space in all_spaces:
+			reservations = space.reservations.filter(date=date, reservation_type_id=1)
+			if reservations:
+				status = reservations[0]
+				space.status = status
 			else:
-				for space in all_spaces:
-					reservations = space.reservations.filter(date=date, reservation_type_id=1)
-					if reservations:
-						status = reservations[0]
-						space.status = status
-					else:
-						space.status = 'Open'
-					spaces.append(space)
+				space.status = 'Open'
+			spaces.append(space)
 
 		template_name = 'browse.html'
 
@@ -50,26 +73,37 @@ def space_details(request, space_id, date):
 	if request.method == 'POST':
 		space = Space.objects.get(pk=space_id)
 		reservation_type = ReservationType.objects.get(pk=1)
-		try:
-			r = Reservation.objects.get(space_id=space_id, date=date, customer=request.user)
-			r.reservation_type = reservation_type
-			r.save()
-			space.dislikes.clear()
-			space.likes.add(request.user)
-			return HttpResponseRedirect(reverse('reserve:space', 
-	                args=[r.space.id, date]))
-		except:
-			r = Reservation(
-				customer = request.user
-			)
-			r.space = space
-			r.date = date
-			r.reservation_type = reservation_type
-			r.save()
-			space.dislikes.clear()
-			space.likes.add(request.user)
-			return HttpResponseRedirect(reverse('reserve:space', 
-	                args=[r.space.id, date]))
+		total_reservations = Reservation.objects.filter(customer=request.user, date=date).count()
+		if total_reservations < 6:
+			try:
+				r = Reservation.objects.get(space_id=space_id, date=date, customer=request.user)
+				r.reservation_type = reservation_type
+				r.save()
+				space.dislikes.clear()
+				space.likes.add(request.user)
+				return HttpResponseRedirect(reverse('reserve:space', 
+		                args=[r.space.id, date]))
+			except:
+				r = Reservation(
+					customer = request.user
+				)
+				r.space = space
+				r.date = date
+				r.reservation_type = reservation_type
+				r.save()
+				space.dislikes.clear()
+				space.likes.add(request.user)
+				return HttpResponseRedirect(reverse('reserve:space', 
+		                args=[r.space.id, date]))
+		else:
+			error = "Too Many Reservations"
+			error_details = "You can cancel a different reservation on this\
+				date or you can call 254-939-6411 and speak to the office\
+				if you need to reserve more than 6 spaces a day."
+			template_name = 'error.html'
+
+			return render(request, template_name, {'error':error, 
+				'error_details':error_details})
 
 	elif request.method == 'GET':
 		space = Space.objects.get(pk=space_id)
@@ -84,9 +118,17 @@ def space_details(request, space_id, date):
 		return render(request, template_name, {'space':space, 'date':date})
 
 def account(request, user_id):
+	if str(request.user.id) == user_id:
 		profile = Profile.objects.get(user_id=user_id)
 		template_name = 'account.html'
 		return render(request, template_name, {'profile':profile})
+	else:
+		error = "No Access"
+		error_details = "You cannot edit another user's account, nice try."
+		template_name = 'error.html'
+
+		return render(request, template_name, {'error':error, 
+			'error_details':error_details})
 
 def edit_account(request, user_id):
 	if request.method == 'POST':
@@ -106,24 +148,29 @@ def edit_account(request, user_id):
 			return HttpResponseRedirect(reverse('reserve:my_account',
 			    args=[request.user.id]))
 		else:
-			print(user_form.is_valid())
-			print(profile_form.is_valid())
-			print("FAIL")
 			return HttpResponseRedirect(reverse('reserve:my_account',
 			    args=[request.user.id]))
 
 	elif request.method == 'GET':
-		profile = Profile.objects.get(user_id=user_id)
-		user_form = EditUserForm(instance=profile.user)
-		profile_form = ProfileForm(instance=profile)
-		template_name = 'edit_account.html'
-		return render(request, template_name, {'user_form':user_form,'profile_form':profile_form})
+		if str(request.user.id) == user_id:
+			profile = Profile.objects.get(user_id=user_id)
+			user_form = EditUserForm(instance=profile.user)
+			profile_form = ProfileForm(instance=profile)
+			template_name = 'edit_account.html'
+			return render(request, template_name, {'user_form':user_form,'profile_form':profile_form})
+		else:
+			error = "No Access"
+			error_details = "You cannot edit another user's account, nice try."
+			template_name = 'error.html'
+
+			return render(request, template_name, {'error':error, 
+				'error_details':error_details})
 
 def reservation(request, user_id):
 	if request.method == 'POST':
 		pass
 	elif request.method == 'GET':
-		reservations = Reservation.objects.filter(customer_id=user_id).order_by('date')
+		reservations = Reservation.objects.filter(customer_id=user_id).order_by('-date')[:12]
 		template_name = 'reservation.html'
 		return render(request, template_name, {'reservations':reservations})
 
@@ -136,7 +183,13 @@ def delete_reservation(request, reservation_id, date):
 		return HttpResponseRedirect(reverse('reserve:reservation', 
             args=[request.user.id]))
 	else:
-		return HttpResponseForbidden('''<h1>Not your reservation, bruh!</h1>''')
+		error = "No Access"
+		error_details = "You cannot edit another user's reservations,\
+			nice try."
+		template_name = 'error.html'
+
+		return render(request, template_name, {'error':error, 
+			'error_details':error_details})
 
 
 def register(request):

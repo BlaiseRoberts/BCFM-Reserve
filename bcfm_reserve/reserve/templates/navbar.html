@@ -6,6 +6,7 @@
     <ul class="right hide-on-med-and-down">
     {%if user.is_authenticated%}
       <li><a href="{% url 'reserve:browse' %}">Browse Daily Spaces</a></li>
+      <li><a href="{% url 'reserve:buildings' %}">Buildings</a></li>
       <li><a href="{% url 'reserve:my_account' request.user.id %}">My Account</a></li>
       <li><a href="{% url 'reserve:reservation' request.user.id %}">My Reservations</a></li>
       <li><a href="{% url 'reserve:rules' %}">Rules</a></li>
@@ -15,6 +16,7 @@
       <li><a href="{% url 'reserve:register' %}">Register</a></li>
       <li><a href="{% url 'reserve:rules' %}">Rules</a></li>
       <li><a href="{% url 'reserve:browse' %}">Browse Daily Spaces</a></li>
+      <li><a href="{% url 'reserve:buildings' %}">Buildings</a></li>
     {%endif%}
     </ul>
   </div>

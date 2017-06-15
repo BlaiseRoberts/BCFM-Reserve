@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="card-panel red lighten-4">
+	<h1 class="center-align">{{error}}</h1>
+	<hr>
+	<div class="row">
+		<div class="col s8 offset-s2">
+			<blockquote>
+			<i><p class="flow-text center-align">{{error_details}}</p></i>
+			</blockquote>
+		</div>
+	</div>
+</div>
+{%endblock%}

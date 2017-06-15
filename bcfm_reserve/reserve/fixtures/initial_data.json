@@ -51,6 +51,13 @@
   }
 },
 {
+  "model": "reserve.vacancystatus",
+  "pk": 2,
+  "fields": {
+    "label": "On Contract"
+  }
+},
+{
   "model": "reserve.spacetype",
   "pk": 1,
   "fields": {
@@ -114,6 +121,62 @@
   }
 },
 {
+  "model": "reserve.spacetype",
+  "pk": 10,
+  "fields": {
+    "label": "Barn 1"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 11,
+  "fields": {
+    "label": "Barn 2"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 12,
+  "fields": {
+    "label": "Barn 4"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 13,
+  "fields": {
+    "label": "Barn 5"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 14,
+  "fields": {
+    "label": "Barn 6"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 15,
+  "fields": {
+    "label": "Barn 7"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 16,
+  "fields": {
+    "label": "Barn 8"
+  }
+},
+{
+  "model": "reserve.spacetype",
+  "pk": 17,
+  "fields": {
+    "label": "Barn 10"
+  }
+},
+{
   "model": "reserve.parking",
   "pk": 1,
   "fields": {
@@ -145,17 +208,285 @@
   "model": "reserve.building",
   "pk": 1,
   "fields": {
-    "title": "Test Building",
-    "space_type": 1,
+    "title": "1",
+    "space_type": 10,
     "vacancy_status": 1,
-    "space": "30x20",
-    "parking": 1,
+    "space": "20x20",
+    "parking": 4,
     "weekly_access": true,
-    "price": 250,
+    "price": 300,
     "deposit": 100,
-    "contact_list": [
-      1
-    ]
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 2,
+  "fields": {
+    "title": "2",
+    "space_type": 10,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": true,
+    "price": 300,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 3,
+  "fields": {
+    "title": "3",
+    "space_type": 10,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": true,
+    "price": 275,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 4,
+  "fields": {
+    "title": "4",
+    "space_type": 10,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": true,
+    "price": 300,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 5,
+  "fields": {
+    "title": "5",
+    "space_type": 10,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": true,
+    "price": 300,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 6,
+  "fields": {
+    "title": "6",
+    "space_type": 10,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": true,
+    "price": 300,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 7,
+  "fields": {
+    "title": "7",
+    "space_type": 10,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": true,
+    "price": 300,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 8,
+  "fields": {
+    "title": "8",
+    "space_type": 10,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": true,
+    "price": 300,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 9,
+  "fields": {
+    "title": "9",
+    "space_type": 10,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": true,
+    "price": 300,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 10,
+  "fields": {
+    "title": "10",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": false,
+    "price": 275,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 11,
+  "fields": {
+    "title": "11",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "10x20",
+    "parking": 1,
+    "weekly_access": false,
+    "price": 175,
+    "deposit": 75,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 12,
+  "fields": {
+    "title": "12",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "10x20",
+    "parking": 1,
+    "weekly_access": false,
+    "price": 175,
+    "deposit": 75,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 13,
+  "fields": {
+    "title": "13",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": false,
+    "price": 275,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 14,
+  "fields": {
+    "title": "14",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "10x20",
+    "parking": 1,
+    "weekly_access": false,
+    "price": 175,
+    "deposit": 75,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 15,
+  "fields": {
+    "title": "15",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "10x20",
+    "parking": 1,
+    "weekly_access": false,
+    "price": 175,
+    "deposit": 75,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 16,
+  "fields": {
+    "title": "16",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": false,
+    "price": 275,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 17,
+  "fields": {
+    "title": "18",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "20x20",
+    "parking": 4,
+    "weekly_access": false,
+    "price": 275,
+    "deposit": 100,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 18,
+  "fields": {
+    "title": "20",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "10x20",
+    "parking": 1,
+    "weekly_access": false,
+    "price": 200,
+    "deposit": 75,
+    "contact_list": []
+  }
+},
+{
+  "model": "reserve.building",
+  "pk": 19,
+  "fields": {
+    "title": "21",
+    "space_type": 11,
+    "vacancy_status": 1,
+    "space": "10x20",
+    "parking": 1,
+    "weekly_access": false,
+    "price": 200,
+    "deposit": 75,
+    "contact_list": []
   }
 },
 {
@@ -2141,7 +2472,7 @@
   "pk": 140,
   "fields": {
     "title": "A15a",
-    "space_type": 9,
+    "space_type": 6,
     "tables": 0,
     "space": "10x12",
     "parking": 1,
@@ -2155,7 +2486,7 @@
   "pk": 141,
   "fields": {
     "title": "A15b",
-    "space_type": 9,
+    "space_type": 6,
     "tables": 0,
     "space": "12x30",
     "parking": 2,
@@ -2211,7 +2542,7 @@
   "pk": 145,
   "fields": {
     "title": "D14a",
-    "space_type": 9,
+    "space_type": 6,
     "tables": 0,
     "space": "20x20",
     "parking": 2,
@@ -2239,7 +2570,7 @@
   "pk": 147,
   "fields": {
     "title": "D3a",
-    "space_type": 9,
+    "space_type": 6,
     "tables": 0,
     "space": "10x15",
     "parking": 1,
