@@ -12,9 +12,29 @@ ReservationType, VacancyStatus, Parking, Profile
 import datetime
 
 def index(request):
+	try:
+		liked_spaces = request.user.likes.all()
+		print(liked_spaces)
+	except:
+		liked_spaces = []
+		print("Anon User")
+
+	recommended_spaces = []
+	date_today = datetime.date.today()
+	date_ordinal = date_today.isoweekday()
+	days_ahead = 6 - date_ordinal
+	if days_ahead == -1:
+		days_ahead += 7
+	next_date = date_today+datetime.timedelta(days=days_ahead)
+
+	for space in liked_spaces:
+		print(space.reservations.filter(date=str(next_date),reservation_type__in=[1,3,4]).count())
+		if space.reservations.filter(date=str(next_date),reservation_type__in=[1,3,4]).count() == 0:
+			recommended_spaces.append(space)
 	template_name = 'index.html'
 
-	return render(request, template_name, {})
+	return render(request, template_name, {'recommended_spaces':recommended_spaces,
+		'next_date':next_date})
 
 def rules(request):
 	template_name = 'rules.html'
@@ -114,6 +134,21 @@ def browse(request, date=None):
 def space_details(request, space_id, date):
 	if request.method == 'POST':
 		space = Space.objects.get(pk=space_id)
+
+		like_dislike_button = request.POST.get("like_dislike_button", "")
+
+		if like_dislike_button == "Like":
+			space.dislikes.clear()
+			space.likes.add(request.user)
+			return HttpResponseRedirect(reverse('reserve:space', 
+	                args=[space.id, date]))
+
+		if like_dislike_button == "Dislike":
+			space.likes.clear()
+			space.dislikes.add(request.user)
+			return HttpResponseRedirect(reverse('reserve:space', 
+	                args=[space.id, date]))
+
 		reservation_type = ReservationType.objects.get(pk=1)
 		total_reservations = Reservation.objects.filter(customer=request.user, date=date).count()
 		if total_reservations < 6:

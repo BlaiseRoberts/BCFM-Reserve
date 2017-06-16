@@ -158,7 +158,7 @@
   "model": "reserve.vacancystatus",
   "pk": 2,
   "fields": {
-    "label": "On Contract"
+    "label": "On Monthly Contract"
   }
 },
 {
@@ -748,32 +748,6 @@
     "name": "Can delete reservation",
     "content_type": 14,
     "codename": "delete_reservation"
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$36000$E4xqzZlBTPS8$KkkcUyKB+1aLBaHKh9tZfVosfF9uYRNcS1BXCr5hcv4=",
-    "last_login": "2017-06-16T19:05:43.475Z",
-    "is_superuser": false,
-    "username": "blaiser",
-    "first_name": "Blaise",
-    "last_name": "Roberts",
-    "email": "b@b.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2017-06-16T19:05:43.350Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "reserve.profile",
-  "pk": 1,
-  "fields": {
-    "user": 1,
-    "phone": "2547605908"
   }
 },
 {

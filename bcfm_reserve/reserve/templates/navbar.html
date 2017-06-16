@@ -5,11 +5,11 @@
     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
     {%if user.is_authenticated%}
-      <li><a href="{% url 'reserve:browse' %}">Browse Daily Spaces</a></li>
+      <li><a href="{% url 'reserve:browse' %}">Spaces</a></li>
       <li><a href="{% url 'reserve:buildings' %}">Buildings</a></li>
-      <li><a href="{% url 'reserve:my_account' request.user.id %}">My Account</a></li>
-      <li><a href="{% url 'reserve:reservation' request.user.id %}">My Reservations</a></li>
+      <li><a href="{% url 'reserve:reservation' request.user.id %}">Reservations</a></li>
       <li><a href="{% url 'reserve:rules' %}">Rules</a></li>
+      <li><a href="{% url 'reserve:my_account' request.user.id %}"><i class="medium material-icons">perm_identity</i></a></li>
       <li><a href="{% url 'reserve:logout' %}">Logout</a></li>
     {%else%}
       <li><a href="{% url 'reserve:login'  %}">Login</a></li>

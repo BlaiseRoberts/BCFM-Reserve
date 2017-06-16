@@ -21,19 +21,45 @@
   </div>
 
 <h1 class="center-align">Space {{space.title}} in {{space.space_type}}</h1>
-<p class="flow-text center-align">on {{date}}</p>
+
+<div class="row" style="margin:0;">
+	<div class="col s6">
+		<p class="flow-text right-align"><i>on {{date}}</i></p>
+	</div>
+	{%if user_liked%}
+	<div class="card-panel col s2 blue darken-2" style="margin-bottom:0;">
+		<p class="center-align white-text"><i class="tiny material-icons">thumb_up</i> Liked</p>	
+	</div>
+	{%endif%}
+	{%if user_disliked%}
+	<div class="card-panel col s2 red darken-2" style="margin-bottom:0;">
+		<p class="center-align white-text"><i class="tiny material-icons">thumb_down</i> Disliked</p>	
+	</div>
+	{%endif%}
+</div>
+
 <div class="row">
-	<div class="card-panel teal lighten-4 col s6 offset-s3">
+	<div class="card-panel teal lighten-4 col s8 offset-s2">
 		<p class="center-align flow-text">{{space.status}}</p>
+		<hr>
 		<p>Tables:  {{space.tables}}</p>
 		<p>Space:  {{space.space}}</p>
-		<p>Price:  {{space.price}}</p>
+		<p>Price:  ${{space.price}}.00/day</p>
 		<p>Parking:  {{space.parking}}</p>
-	{%if space.status == "Open"%}
-		  <div class="right-align">
-		  <a style="margin:1rem;" class="modal-trigger waves-effect waves-light btn btn-flat" href="#reservationModal">Reserve</a>
+		<hr>
+		  <div class="right-align" style="margin:1rem;">
+			{%if space.status == "Open"%}
+		  		<a class="modal-trigger waves-effect waves-light btn teal darken-2" style="margin:1rem;" href="#reservationModal">Reserve</a>
+		  	{%endif%}
+		  	<form method="POST" action= "">
+                {% csrf_token %}
+                <div class="left-align">
+                    <input class="btn blue darken-2" name="like_dislike_button" type="submit" value="Like" style="margin-right:5px">
+                    <input class="btn red darken-2" name="like_dislike_button" type="submit" value="Dislike">
+                </div>
+            </form>
 		  </div>
-	{%endif%}
+	
 	</div>
 	<div class="center-align">
 		<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
