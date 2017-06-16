@@ -1,3 +1,4 @@
+insert into reserve_building values(null, "4a", "20x20", 0, 275, 100, 4, 12, 2);
 insert into reserve_building values(null, "4c", "10x20", 0, 175, 75, 1, 12, 2);
 insert into reserve_building values(null, "4d", "10x20", 0, 175, 75, 1, 12, 2);
 insert into reserve_building values(null, "4e", "10x20", 0, 175, 75, 1, 12, 2);

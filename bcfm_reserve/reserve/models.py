@@ -66,7 +66,7 @@ class SpaceType (models.Model):
 	Author: Blaise Roberts
 	"""
 	label = models.CharField(max_length=50)
-	monthly = models.BooleanField()
+	monthly = models.NullBooleanField()
 
 
 	def __str__(self):
