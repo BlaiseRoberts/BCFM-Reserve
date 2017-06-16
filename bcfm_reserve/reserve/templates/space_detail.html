@@ -47,6 +47,7 @@
 		<p>Price:  ${{space.price}}.00/day</p>
 		<p>Parking:  {{space.parking}}</p>
 		<hr>
+		  {%if user.is_authenticated%}
 		  <div class="right-align" style="margin:1rem;">
 			{%if space.status == "Open"%}
 		  		<a class="modal-trigger waves-effect waves-light btn teal darken-2" style="margin:1rem;" href="#reservationModal">Reserve</a>
@@ -58,11 +59,28 @@
                     <input class="btn red darken-2" name="like_dislike_button" type="submit" value="Dislike">
                 </div>
             </form>
+            <div class="center-align" style="margin:1rem;">
+				<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
+			</div>
 		  </div>
-	
-		<div class="center-align" style="margin:1rem;">
-			<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
+		  {%else%}
+		  	<div class="center-align" style="margin:1rem;">
+				<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
+			</div>
+		  </div>
 		</div>
+			<div class="row card-panel teal darken-2">
+				<p class="flow-text center-align white-text">Login or Register Below to Add Your Info to a Wait List</p>
+				<div class="col s6 center-align" style="padding-top:2rem; padding-bottom: 2rem;">
+					<a class="btn waves-effect pulse" href="{% url 'reserve:login' %}">Login</a>
+				</div>
+				<div class="col s6 center-align" style="padding-top:2rem; padding-bottom: 2rem;">
+					<a class="btn waves-effect blue pulse" href="{% url 'reserve:register' %}">Register</a>
+				</div>
+			</div>
+			{%endif%}
+	
+		
 	</div>
 </div>
 {%endblock%}

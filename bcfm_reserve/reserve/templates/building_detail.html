@@ -34,14 +34,29 @@
 		<p>Price:  ${{building.price}}.00/month</p>
 		<p>Deposit:  ${{building.deposit}}.00</p>
 		<p>Parking:  {{building.parking}}</p>
-	{%if on_list%}
-	{%else%}
-		{%if building.vacancy_status_id == 2%}
-			  <div class="right-align">
-			  <a style="margin:1rem;" class="modal-trigger waves-effect waves-light btn teal darken-3" href="#waitListModal">Add to Wait List</a>
-			  </div>
+		{%if user.is_authenticated%}
+		{%if on_list%}
+		{%else%}
+			{%if building.vacancy_status_id == 2%}
+				  <div class="right-align">
+				  <a style="margin:1rem;" class="modal-trigger waves-effect waves-light btn teal darken-3" href="#waitListModal">Add to Wait List</a>
+				  </div>
+			{%endif%}
 		{%endif%}
-	{%endif%}
+		
+		{%else%}
+		</div>
+		</div>
+<div class="row card-panel teal darken-2">
+	<p class="flow-text center-align white-text">Login or Register Below to Add Your Info to a Wait List</p>
+	<div class="col s6 center-align" style="padding-top:2rem; padding-bottom: 2rem;">
+		<a class="btn waves-effect pulse" href="{% url 'reserve:login' %}">Login</a>
+	</div>
+	<div class="col s6 center-align" style="padding-top:2rem; padding-bottom: 2rem;">
+		<a class="btn waves-effect blue pulse" href="{% url 'reserve:register' %}">Register</a>
+	</div>
+</div>
+		{%endif%}
 	</div>
 </div>
 {%endblock%}

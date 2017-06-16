@@ -42,6 +42,16 @@
 			</ul>
 	    </div>
 	</div>
+	{%else%}
+	<div class="row card-panel teal lighten-4">
+		<p class="flow-text center-align">Login or Register Below to Start Reserving Spaces</p>
+		<div class="col s6 center-align" style="padding-top:2rem; padding-bottom: 2rem;">
+			<a class="btn waves-effect pulse" href="{% url 'reserve:login' %}">Login</a>
+		</div>
+		<div class="col s6 center-align" style="padding-top:2rem; padding-bottom: 2rem;">
+			<a class="btn waves-effect blue pulse" href="{% url 'reserve:register' %}">Register</a>
+		</div>
+	</div>
 	{%endif%}
 </div>
 {%endblock%}
