@@ -1,11 +1,47 @@
 {%extends 'base.html'%}
 
 {%block content%}
-<h1 class="center-align">Welcome to BCFM Reservations</h1>
 <div class="card-panel teal lighten-3">
-	<img class="materialboxed" width="200px" src="/images/test-med.jpg">
+	<h2 class="center-align">Welcome to BCFM Reservations</h2>
+	<p class="center-align flow-text">Get Started Below...</p>
+	<div class="row">
+		<div class="col s4 center-align card-panel teal darken-1" style="padding-top:2rem; padding-bottom: 2rem;">
+			<p class="flow-text white-text">Read our Rules</p>
+			<i class="large material-icons white-text" style="display:block;">assignment</i>
+			<a class="btn" href="{% url 'reserve:rules' %}">Rules</a>
+		</div>
+		<div class="col s4 center-align card-panel blue darken-2" style="padding-top:2rem; padding-bottom: 2rem;">
+			<p class="flow-text white-text">Browse Daily Spaces</p>
+			<i class="large material-icons white-text" style="display:block;">store</i>
+			<a class="btn blue" href="{% url 'reserve:browse' %}">Spaces</a>
+		</div>
+		<div class="col s4 center-align card-panel deep-purple darken-2" style="padding-top:2rem; padding-bottom: 2rem;">
+			<p class="flow-text white-text">Discover Buildings</p>
+			<i class="large material-icons white-text" style="display:block;">business</i>
+			<a class="btn deep-purple" href="{% url 'reserve:buildings' %}">View Buildings</a>
+		</div>
+	</div>
+	<hr>
 	{%if user.is_authenticated%}
-		
+	<div class="row">
+		<div class="col s6 card-panel teal darken-1">
+			<p class="flow-text center-align white-text">Liked Spots Open on '{{next_date}}'</p>
+			<ul class="collapsible popout" data-collapsible="accordion">
+				{%for space_type in space_types%}
+				<li>
+					<div class="collapsible-header flow-text center-align">{{space_type.label}}</div>
+					<div class="collapsible-body collection teal lighten-4">
+						{%for space in spaces%}
+							{%if space.space_type.pk == space_type.pk%}
+				        	<a href="{% url 'reserve:space' space.id next_date %}" class="collection-item">{{space.title}} is Open</a>
+							{%endif%}
+				        {%endfor%}
+			      	</div>
+			    </li>
+			    {%endfor%}
+			</ul>
+	    </div>
+	</div>
 	{%endif%}
 </div>
 {%endblock%}

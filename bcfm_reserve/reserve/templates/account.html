@@ -1,8 +1,10 @@
 {%extends 'base.html'%}
 
 {%block content%}
-<h1 class="center-align">My Account</h1>
-<p class="center-align flow-text">for {{profile.user.first_name}} {{profile.user.last_name}}</p>
+<div class="card-panel teal darken-2">
+	<h1 class="center-align white-text">My Account</h1>
+	<p class="center-align flow-text white-text">for {{profile.user.first_name}} {{profile.user.last_name}}</p>
+</div>
 <div class="row">
 	<div class="card-panel teal lighten-4 col s6 offset-s3">
 		<h5>First Name 

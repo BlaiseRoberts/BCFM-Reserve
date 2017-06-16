@@ -2,14 +2,16 @@
 {%load browse_tags%}
 
 {%block content%}
-<h1 class="center-align">Browse Daily Spaces</h1>
+<div class="card-panel teal darken-2">
+	<h1 class="center-align white-text">Browse Daily Spaces</h1>
+</div>
 <div class="row">
-	<div class="col s5 offset-s1 card-panel blue-grey lighten-4" style="display:flex;flex-direction:column;align-items:center;padding-bottom:2em;">
+	<div class="col s5 offset-s1 card-panel blue-grey lighten-4" style="display:flex;flex-direction:column;align-items:center;padding-bottom:2em;height:21rem;">
 		<p class="flow-text">Full Map</p>
 		<img class="materialboxed" width="200px" src="/images/flea-map.png">
 	</div>
-	<div class="col s5">
-		<form method="GET" action= "{% url 'reserve:browse' %}">
+	<div class="col s5 card-panel teal lighten-1" style="height:21rem;">
+		<form method="GET" action= "{% url 'reserve:browse' %}" style="margin:1rem;">
 		  <div class="form-group">
 		    <input class="datepicker" name="date_picker" id="date_picker" type="date" placeholder="Please choose a date">
 		  </div>

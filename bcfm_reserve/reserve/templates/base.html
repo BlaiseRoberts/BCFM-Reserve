@@ -1,13 +1,42 @@
+{%load staticfiles%}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>BCFM Reservations</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+		html, body {
+		  width: 100%;
+		  height: 100%;
+		  overflow: scroll;
+		}
+		body {
+		  background: #e0e6eb;
+		}
 
+		svg {
+		  width: 100%;
+		  height: 100%;
+		  g {
+		    mix-blend-mode: lighten;
+		  }
+		  polygon {
+		    stroke: none;
+		    fill: white;
+		  }
+		}
+	</style>
 </head>
 <body>
 {%include 'navbar.html'%}
+<div style="position:fixed;z-index:-1;height:100%; width:100%;">
+<svg id="demo" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0" color-interpolation="sRGB"><stop id="stop1a" offset="0%" stop-color="#12a3b4"></stop><stop id="stop1b" offset="100%" stop-color="#ff509e"></stop></linearGradient><linearGradient id="grad2" x1="0" y1="0" x2="1" y2="0" color-interpolation="sRGB"><stop id="stop2a" offset="0%" stop-color="#e3bc13"></stop><stop id="stop2b" offset="100%" stop-color="#00a78f"></stop></linearGradient></defs><rect id="rect1" x="0" y="0" width="1600" height="600" stroke="none" fill="url(#grad1)"></rect><rect id="rect2" x="0" y="0" width="1600" height="600" stroke="none" fill="url(#grad2)"></rect></svg>
+</div>
+
+
+
+
 
 	<div class="container">
 	{%block content%}
@@ -38,26 +67,12 @@
 	  src="https://code.jquery.com/jquery-3.2.1.min.js"
 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+
 	{# INITIALIZE #}
-	<script type="text/javascript">
-    	$( document ).ready(function(){
-	    	$('.modal').modal();
-	      	$(".button-collapse").sideNav();
-	      	$('.collapsible').collapsible();
-	      	$('.materialboxed').materialbox();
-	      	$('.datepicker').pickadate({
-	    		selectMonths: true,
-	    		selectYears: 1, 
-	    		disable: [
-	    		{from: [2000,1,1],to: true},
-	    			2,3,4,5,6
-				],
-				max: true+20,
-				format: 'yyyy-mm-dd',
-				closeOnSelect: true
-			});
-		})
-	</script>
+	<script type="text/javascript" src="{% static 'material_init.js' %}"></script>
+	<script type="text/javascript" src="{% static 'codepen.js' %}"></script>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 </body>
 </html>

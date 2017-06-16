@@ -19,25 +19,25 @@
 		</form>
 	</div>
   </div>
+<div class="card-panel teal darken-2">
+	<h1 class="center-align white-text">Space {{space.title}} in {{space.space_type}}</h1>
 
-<h1 class="center-align">Space {{space.title}} in {{space.space_type}}</h1>
-
-<div class="row" style="margin:0;">
-	<div class="col s6">
-		<p class="flow-text right-align"><i>on {{date}}</i></p>
+	<div class="row" style="margin:0;">
+		<div class="col s6">
+			<p class="flow-text right-align white-text"><i>on {{date}}</i></p>
+		</div>
+		{%if user_liked%}
+		<div class="card-panel col s2 blue darken-2" style="margin-bottom:0;">
+			<p class="center-align white-text"><i class="tiny material-icons">thumb_up</i> Liked</p>	
+		</div>
+		{%endif%}
+		{%if user_disliked%}
+		<div class="card-panel col s2 red darken-2" style="margin-bottom:0;">
+			<p class="center-align white-text"><i class="tiny material-icons">thumb_down</i> Disliked</p>	
+		</div>
+		{%endif%}
 	</div>
-	{%if user_liked%}
-	<div class="card-panel col s2 blue darken-2" style="margin-bottom:0;">
-		<p class="center-align white-text"><i class="tiny material-icons">thumb_up</i> Liked</p>	
-	</div>
-	{%endif%}
-	{%if user_disliked%}
-	<div class="card-panel col s2 red darken-2" style="margin-bottom:0;">
-		<p class="center-align white-text"><i class="tiny material-icons">thumb_down</i> Disliked</p>	
-	</div>
-	{%endif%}
 </div>
-
 <div class="row">
 	<div class="card-panel teal lighten-4 col s8 offset-s2">
 		<p class="center-align flow-text">{{space.status}}</p>
@@ -60,9 +60,9 @@
             </form>
 		  </div>
 	
-	</div>
-	<div class="center-align">
-		<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
+		<div class="center-align" style="margin:1rem;">
+			<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
+		</div>
 	</div>
 </div>
 {%endblock%}

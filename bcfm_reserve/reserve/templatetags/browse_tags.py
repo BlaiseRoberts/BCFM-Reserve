@@ -10,7 +10,7 @@ def get_open_count(date, space_type_id):
 	reservations = []
 	for space in spaces:
 		try:
-			reservations.append(Reservation.objects.get(space=space, date=date, reservation_type_id=1))
+			reservations.append(Reservation.objects.get(space=space, date=date, reservation_type_id__in=[1,3,4]))
 		except:
 			pass
 	reservation_count = len(reservations)

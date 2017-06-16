@@ -11,17 +11,19 @@
             <br>
         </div>
         {% else %}
-        <form id="user_form" 
-        method="post" action="{% url 'reserve:register' %}"
-                enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <div class="center-align">
-                <input style="margin:1em;" class="btn btn-flat" 
-                type="submit" name="submit" 
-                value="Register" />
-            </div>
-        </form>
+        <div class="card-panel teal lighten-5">
+            <form id="user_form" 
+            method="post" action="{% url 'reserve:register' %}"
+                    enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
+                <div class="center-align">
+                    <input style="margin:1em;" class="btn btn-flat" 
+                    type="submit" name="submit" 
+                    value="Register" />
+                </div>
+            </form>
+        </div>
         {% endif %}
 {% endblock %}

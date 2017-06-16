@@ -20,10 +20,12 @@
 	</div>
   </div>
 
-<h1 class="center-align">Building {{building.title}} in {{building.space_type}}</h1>
-{%if on_list%}
-<p class="center-align flow-text red-text text-darken-2">You are on the wait list for this building</p>
-{%endif%}
+<div class="card-panel teal lighten-5">
+	<h1 class="center-align">Building {{building.title}} in {{building.space_type}}</h1>
+	{%if on_list%}
+	<p class="center-align flow-text red-text text-darken-2">You are on the wait list for this building</p>
+	{%endif%}
+</div>
 <div class="row">
 	<div class="card-panel teal lighten-4 col s6 offset-s3">
 		<p class="center-align flow-text">{{building.vacancy_status}}</p>

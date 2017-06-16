@@ -20,6 +20,7 @@ def index(request):
 		print("Anon User")
 
 	recommended_spaces = []
+	space_types = set()
 	date_today = datetime.date.today()
 	date_ordinal = date_today.isoweekday()
 	days_ahead = 6 - date_ordinal
@@ -31,10 +32,12 @@ def index(request):
 		print(space.reservations.filter(date=str(next_date),reservation_type__in=[1,3,4]).count())
 		if space.reservations.filter(date=str(next_date),reservation_type__in=[1,3,4]).count() == 0:
 			recommended_spaces.append(space)
+			space_types.add(space.space_type)
+
 	template_name = 'index.html'
 
-	return render(request, template_name, {'recommended_spaces':recommended_spaces,
-		'next_date':next_date})
+	return render(request, template_name, {'spaces':recommended_spaces,
+		'next_date':next_date, 'space_types':space_types})
 
 def rules(request):
 	template_name = 'rules.html'

@@ -4,7 +4,8 @@
 		<div class="card-panel teal lighten-3 center-align">
         	<h1>Login to BCFM Reservation</h1>
 		</div>
-		<div class="">
+
+		<div class="card-panel teal lighten-5">
         <form id="login_form" method="post" action="{% url 'reserve:login' %}">
             {% csrf_token %}
             {{ login_form.as_p }}
