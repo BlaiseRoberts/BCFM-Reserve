@@ -68,6 +68,7 @@ def browse(request, date=None):
 	if request.method == 'GET':
 		form_data = request.GET
 		all_spaces = Space.objects.all()
+		space_types = SpaceType.objects.filter(monthly=0)
 		spaces = []
 		if date:
 			date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
@@ -109,7 +110,8 @@ def browse(request, date=None):
 
 		template_name = 'browse.html'
 
-		return render(request, template_name, {'spaces':spaces, 'date':date})
+		return render(request, template_name, {'spaces':spaces, 'date':date,
+			'space_types':space_types})
 
 def space_details(request, space_id, date):
 	if request.method == 'POST':
