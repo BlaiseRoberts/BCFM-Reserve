@@ -4,13 +4,16 @@
 
 
 <h1 class="center-align">My Reservations</h1>
+<i>
+	<p class="center-align red-text text-darken-2">
+		We will only hold reservaions until 9AM the date of your reservation.
+	</p>
+</i>
 <div class="row">
 	<div class="col s6 card-panel teal lighten-3">
 		<p class="flow-text center-align">All Reservations</p>
 			<ul class="collection">
-				{%for reservation in reservations%}
-				
-				{# Modal for cancellation confirmation #}
+				{%for reservation in reservations%}				
 				<div id="reservationModal{{reservation.id}}" class="modal modal-fixed-footer">
 				    <div class="modal-content">
 				      <h3 class="modal-header">Cancel Reservation {{reservaion.space.title}}</h3>
@@ -21,7 +24,7 @@
 				      </div>	
 				    </div>
 					<div class="modal-footer">
-						<a href="{% url 'reserve:delete_reservation' reservation.id reservation.date %}" class="btn red darken-2 modal-action modal-close waves-effect waves-light">Delete</a>
+						<a href="{% url 'reserve:delete_reservation' reservation.id reservation.date %}" class="btn red darken-2 modal-action modal-close waves-effect waves-light">Cancel Reservation</a>
 					</div>
 				  </div>
 

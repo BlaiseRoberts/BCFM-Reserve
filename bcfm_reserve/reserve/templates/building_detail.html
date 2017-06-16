@@ -1,0 +1,44 @@
+{%extends 'base.html'%}
+
+{%block content%}
+ <div id="waitListModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h3 class="modal-header">{{building.title}}</h3>
+      <div class="row">
+		<div class="input-field col s12">
+			<p class="flow-text">Are you sure you would like to add you contact into to the wait list for {{building.title}}?  (You will be contacted if the building becomes available.)</p>
+		</div>
+      </div>	
+    </div>
+	<div class="modal-footer">
+		<form method="POST" action= "">
+		  {% csrf_token %}
+		  <div class="center-align">
+		  <input class="btn btn-flat modal-action modal-close" type="submit" value="Add to Wait List"/>
+		  </div>
+		</form>
+	</div>
+  </div>
+
+<h1 class="center-align">Building {{building.title}} in {{building.space_type}}</h1>
+{%if on_list%}
+<p class="center-align flow-text red-text text-darken-2">You are on the wait list for this building</p>
+{%endif%}
+<div class="row">
+	<div class="card-panel teal lighten-4 col s6 offset-s3">
+		<p class="center-align flow-text">{{building.vacancy_status}}</p>
+		<p>Weekly Access:  {{building.weekly_access}}</p>
+		<p>Space:  {{building.space}}</p>
+		<p>Price:  {{building.price}}</p>
+		<p>Parking:  {{building.parking}}</p>
+	{%if on_list%}
+	{%else%}
+		{%if building.vacancy_status_id == 2%}
+			  <div class="right-align">
+			  <a style="margin:1rem;" class="modal-trigger waves-effect waves-light btn teal darken-3" href="#waitListModal">Add to Wait List</a>
+			  </div>
+		{%endif%}
+	{%endif%}
+	</div>
+</div>
+{%endblock%}

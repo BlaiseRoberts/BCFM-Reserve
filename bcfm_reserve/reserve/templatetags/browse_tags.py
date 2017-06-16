@@ -1,4 +1,4 @@
-from reserve.models import Space, Reservation
+from reserve.models import Space, Reservation, Building
 
 from django import template
 
@@ -17,3 +17,8 @@ def get_open_count(date, space_type_id):
 	if date == "":
 		reservation_count = spaces.count()
 	return spaces.count() - reservation_count
+
+@register.simple_tag
+def get_building_count(space_type_id):
+	building_count = Building.objects.filter(space_type_id=space_type_id, vacancy_status_id=1).count()
+	return building_count

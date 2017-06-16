@@ -22,9 +22,48 @@ def rules(request):
 	return render(request, template_name, {})
 
 def buildings(request):
-	template_name = 'buildings.html'
+	if request.method == 'POST':
+		buildings = Building.objects.filter(weekly_access=True)
+		for building in buildings:
+			building.contact_list.add(request.user)
+		return HttpResponseRedirect(reverse('reserve:buildings'))
 
-	return render(request, template_name, {})
+	if request.method == 'GET':
+		buildings = Building.objects.all()
+		template_name = 'buildings.html'
+
+		return render(request, template_name, {'buildings':buildings})
+
+def building_details(request, building_id):
+	if request.method == 'POST':
+		building = Building.objects.get(pk=building_id)
+		building.contact_list.add(request.user)
+
+		return HttpResponseRedirect(reverse('reserve:building_details', 
+		                args=[building.id]))
+
+	if request.method == 'GET':
+		try:
+			building = Building.objects.get(pk=building_id)
+			template_name = 'building_detail.html'
+			contact_list = building.contact_list.all()
+			print("it is firing")
+			print(contact_list)
+			if request.user in contact_list:
+				print("TRUE")
+				on_list = True
+				return render(request, template_name, {'building':building,
+					'on_list':on_list})
+			else:
+				return render(request, template_name, {'building':building})
+		except:
+			error = "Building does not Exist"
+			error_details = "You're trying to view a building that doesn't\
+				exist."
+			template_name = 'error.html'
+
+			return render(request, template_name, {'error':error, 
+				'error_details':error_details})
 
 def browse(request, date=None):
 	if request.method == 'GET':
@@ -34,10 +73,12 @@ def browse(request, date=None):
 		if date:
 			date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
 			if date > str(datetime.date.today()+datetime.timedelta(days=21\
-					)) or date_time.isoweekday() in range(1, 6):
+					)) or date_time.isoweekday() in range(1, 6)\
+					or date <= str(datetime.date.today()):
 				error = "Outside Date Range"
 				error_details = "You can not reserve spaces on a weekday\
-				and you can not reserve spaces more than 3 weeks ahead."
+					and you can not reserve spaces more than 3 weeks ahead or\
+					you may have selected a past date."
 				template_name = 'error.html'
 
 				return render(request, template_name, {'error':error, 
@@ -48,10 +89,12 @@ def browse(request, date=None):
 				date = form_data['date_picker']
 				date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
 				if date > str(datetime.date.today()+datetime.timedelta(days=21\
-					)) or date_time.isoweekday() in range(1, 6):
+					)) or date_time.isoweekday() in range(1, 6)\
+					or date <= str(datetime.date.today()):
 					error = "Outside Date Range"
 					error_details = "You can not reserve spaces on a weekday\
-					and you can not reserve spaces more than 3 weeks ahead."
+						and you can not reserve spaces more than 3 weeks ahead\
+						or you may have selected a past date."
 					template_name = 'error.html'
 
 					return render(request, template_name, {'error':error, 
@@ -106,16 +149,24 @@ def space_details(request, space_id, date):
 				'error_details':error_details})
 
 	elif request.method == 'GET':
-		space = Space.objects.get(pk=space_id)
-		reservations = space.reservations.filter(date=date, reservation_type_id=1)
-		if reservations:
-			status = reservations[0]
-			space.status = status
-		else:
-			space.status = 'Open'
-		template_name = 'space_detail.html'
+		try:
+			space = Space.objects.get(pk=space_id)
+			reservations = space.reservations.filter(date=date, reservation_type_id=1)
+			if reservations:
+				status = reservations[0]
+				space.status = status
+			else:
+				space.status = 'Open'
+			template_name = 'space_detail.html'
 
-		return render(request, template_name, {'space':space, 'date':date})
+			return render(request, template_name, {'space':space, 'date':date})
+		except:
+			error = "Space does not Exist"
+			error_details = "You're searching for a space that doesn't exist."
+			template_name = 'error.html'
+
+			return render(request, template_name, {'error':error, 
+				'error_details':error_details})
 
 def account(request, user_id):
 	if str(request.user.id) == user_id:

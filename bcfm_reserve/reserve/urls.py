@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^browse/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', views.browse, name='browse'),
     url(r'^rules$', views.rules, name='rules'),
     url(r'^buildings$', views.buildings, name='buildings'),
+    url(r'^building/(?P<building_id>[0-9]+)/$', views.building_details, name='building_details'),
     url(r'^space/(?P<space_id>[0-9]+)/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', views.space_details, name='space'),
     url(r'^myaccount/(?P<user_id>[0-9]+)/$', views.account, name='my_account'),
     url(r'^edit_myaccount/(?P<user_id>[0-9]+)/$', views.edit_account, name='edit_account'),

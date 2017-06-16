@@ -1,5 +1,70 @@
 {%extends 'base.html'%}
+{%load browse_tags%}
 
 {%block content%}
+<div id="waitListModal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+	  <h3 class="modal-header">Weekly Access</h3>
+	  <div class="row">
+		<div class="input-field col s12">
+			<p class="flow-text">Are you sure you would like to add you contact into to the wait list for all buildings with weekly access?  (You will be contacted if the building becomes available.)</p>
+		</div>
+	  </div>	
+	</div>
+	<div class="modal-footer">
+		<form method="POST" action= "">
+		  {% csrf_token %}
+		  <div class="center-align">
+		  <input class="btn btn-flat modal-action modal-close" type="submit" value="Add to Wait List"/>
+		  </div>
+		</form>
+	</div>
+</div>
+
+
+
 <h1 class="center-align">Buildings</h1>
+<div class="row">
+	<div class="col s4 card-panel blue-grey lighten-4" style="display:flex;flex-direction:column;align-items:center;height:21rem;">
+		<p class="flow-text">Full Map</p>
+		<img class="materialboxed" width="200px" src="/images/flea-map.png">
+	</div>
+	<div class="col s8 card-panel teal lighten-4" style="height:21rem;">
+		<i><p class="flow-text center-align">Buildings are rented by the month.</p></i> 
+		<p class="flow-text">You must visit the Bell Co. Flea Market in person to fill out contracts begin renting the building, but you can add your into to wait lists to be contacted when a building become available.</p>
+		<div class="center-align">
+		  <a class="modal-trigger waves-effect waves-light btn teal darken-3" href="#waitListModal">Add to Wait List for Weekly Access</a>
+		</div>
+	</div>
+</div>
+<div class="row">
+	{%if error%}
+	<p class="flow-text center-align">{{error}}</p>
+	{%else%}
+	<div class="col s12 card-panel teal">
+		<ul class="collapsible popout" data-collapsible="accordion">
+			<li>
+				<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 10%}</span>Barn 1</div>
+				<div class="collapsible-body collection teal lighten-4">
+					{%for building in buildings%}
+						{%if building.space_type.pk == 10%}
+			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}, Weekly Access: {{building.weekly_access}}, is {{building.vacancy_status}}.</a>
+						{%endif%}
+			        {%endfor%}
+	      		</div>
+	      	</li>
+	      	<li>
+	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 11%}</span>Barn 2</div>
+				<div class="collapsible-body collection teal lighten-4">
+					{%for building in buildings%}
+						{%if building.space_type.pk == 11%}
+			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}, Weekly Access: {{building.weekly_access}}, is {{building.vacancy_status}}.</a>
+						{%endif%}
+			        {%endfor%}
+	      		</div>
+	      	</li>
+		</ul>
+    </div>
+	{%endif%}
+</div>
 {%endblock%}
