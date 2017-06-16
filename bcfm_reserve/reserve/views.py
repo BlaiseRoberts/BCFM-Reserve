@@ -24,7 +24,7 @@ def index(request):
 	date_today = datetime.date.today()
 	date_ordinal = date_today.isoweekday()
 	days_ahead = 6 - date_ordinal
-	if days_ahead == -1:
+	if days_ahead <= 0:
 		days_ahead += 7
 	next_date = date_today+datetime.timedelta(days=days_ahead)
 
@@ -110,6 +110,14 @@ def browse(request, date=None):
 		else:
 			if form_data:
 				date = form_data['date_picker']
+				if date == "":
+					date_today = datetime.date.today()
+					date_ordinal = date_today.isoweekday()
+					days_ahead = 6 - date_ordinal
+					if days_ahead <= 0:
+						days_ahead += 7
+					next_date = date_today+datetime.timedelta(days=days_ahead)
+					date = str(next_date)
 				date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
 				if date > str(datetime.date.today()+datetime.timedelta(days=21\
 					)) or date_time.isoweekday() in range(1, 6)\
