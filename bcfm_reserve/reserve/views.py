@@ -30,9 +30,11 @@ def buildings(request):
 
 	if request.method == 'GET':
 		buildings = Building.objects.all()
+		building_types = SpaceType.objects.filter(monthly=True)
 		template_name = 'buildings.html'
 
-		return render(request, template_name, {'buildings':buildings})
+		return render(request, template_name, {'buildings':buildings, 
+			'building_types':building_types})
 
 def building_details(request, building_id):
 	if request.method == 'POST':
@@ -47,10 +49,7 @@ def building_details(request, building_id):
 			building = Building.objects.get(pk=building_id)
 			template_name = 'building_detail.html'
 			contact_list = building.contact_list.all()
-			print("it is firing")
-			print(contact_list)
 			if request.user in contact_list:
-				print("TRUE")
 				on_list = True
 				return render(request, template_name, {'building':building,
 					'on_list':on_list})
@@ -157,9 +156,19 @@ def space_details(request, space_id, date):
 				space.status = status
 			else:
 				space.status = 'Open'
+			user_liked = False
+			user_disliked = False
+			likes_list = space.likes.all()
+			dislikes_list = space.dislikes.all()
+			if request.user in likes_list:
+				user_liked = True
+			if request.user in dislikes_list:
+				user_disliked = True
+
 			template_name = 'space_detail.html'
 
-			return render(request, template_name, {'space':space, 'date':date})
+			return render(request, template_name, {'space':space, 'date':date,
+				'user_liked':user_liked, 'user_disliked':user_disliked})
 		except:
 			error = "Space does not Exist"
 			error_details = "You're searching for a space that doesn't exist."

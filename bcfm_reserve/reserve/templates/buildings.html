@@ -7,7 +7,7 @@
 	  <h3 class="modal-header">Weekly Access</h3>
 	  <div class="row">
 		<div class="input-field col s12">
-			<p class="flow-text">Are you sure you would like to add you contact into to the wait list for all buildings with weekly access?  (You will be contacted if the building becomes available.)</p>
+			<p class="flow-text">Are you sure you would like to add your contact info to the wait list for all buildings with weekly access?  (You will be contacted if the building becomes available.)</p>
 		</div>
 	  </div>	
 	</div>
@@ -31,7 +31,7 @@
 	</div>
 	<div class="col s8 card-panel teal lighten-4" style="height:21rem;">
 		<i><p class="flow-text center-align">Buildings are rented by the month.</p></i> 
-		<p class="flow-text">You must visit the Bell Co. Flea Market in person to fill out contracts begin renting the building, but you can add your into to wait lists to be contacted when a building become available.</p>
+		<p class="flow-text">You must visit the Bell Co. Flea Market in person to fill out contracts begin renting the building, but you can add your info to wait lists to be contacted when a building become available.</p>
 		<div class="center-align">
 		  <a class="modal-trigger waves-effect waves-light btn teal darken-3" href="#waitListModal">Add to Wait List for Weekly Access</a>
 		</div>
@@ -43,136 +43,18 @@
 	{%else%}
 	<div class="col s12 card-panel teal">
 		<ul class="collapsible popout" data-collapsible="accordion">
+			{%for building_type in building_types%}
 			<li>
-				<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 10%}</span>Barn 1</div>
+				<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count building_type.pk%}</span>{{building_type.label}}</div>
 				<div class="collapsible-body collection teal lighten-4">
 					{%for building in buildings%}
-						{%if building.space_type.pk == 10%}
+						{%if building.space_type.pk == building_type.pk%}
 			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
 						{%endif%}
 			        {%endfor%}
 	      		</div>
 	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 11%}</span>Barn 2</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 11%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 12%}</span>Barn 4</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 12%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 13%}</span>Barn 5</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 13%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 14%}</span>Barn 6</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 14%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 15%}</span>Barn 7</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 15%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 16%}</span>Barn 8</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 16%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 17%}</span>Barn 10</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 17%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 18%}</span>N Buildings</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 18%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 19%}</span>D Buildings</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 19%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 20%}</span>B Buildings</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 20%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 21%}</span>C Buildings</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 21%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
-	      	<li>
-	      		<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_building_count 22%}</span>CB Buildings</div>
-				<div class="collapsible-body collection teal lighten-4">
-					{%for building in buildings%}
-						{%if building.space_type.pk == 22%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-						{%endif%}
-			        {%endfor%}
-	      		</div>
-	      	</li>
+	      	{%endfor%}
 		</ul>
     </div>
 	{%endif%}
