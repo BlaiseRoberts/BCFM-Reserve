@@ -10,6 +10,7 @@ from .models import Reservation, Space, Building, SpaceType,\
 ReservationType, VacancyStatus, Parking, Profile
 
 import datetime
+import pytz
 
 def index(request):
 	try:
@@ -21,7 +22,7 @@ def index(request):
 
 	recommended_spaces = []
 	space_types = set()
-	date_today = datetime.date.today()
+	date_today = datetime.datetime.now(pytz.timezone('US/Pacific'))
 	date_ordinal = date_today.isoweekday()
 	days_ahead = 6 - date_ordinal
 	if days_ahead <= 0:
@@ -29,15 +30,15 @@ def index(request):
 	next_date = date_today+datetime.timedelta(days=days_ahead)
 
 	for space in liked_spaces:
-		print(space.reservations.filter(date=str(next_date),reservation_type__in=[1,3,4]).count())
-		if space.reservations.filter(date=str(next_date),reservation_type__in=[1,3,4]).count() == 0:
+		print(space.reservations.filter(date=str(next_date)[:10],reservation_type__in=[1,3,4]).count())
+		if space.reservations.filter(date=str(next_date)[:10],reservation_type__in=[1,3,4]).count() == 0:
 			recommended_spaces.append(space)
 			space_types.add(space.space_type)
 
 	template_name = 'index.html'
 
 	return render(request, template_name, {'spaces':recommended_spaces,
-		'next_date':next_date, 'space_types':space_types})
+		'next_date':str(next_date)[:10], 'space_types':space_types})
 
 def rules(request):
 	template_name = 'rules.html'
@@ -111,17 +112,17 @@ def browse(request, date=None):
 			if form_data:
 				date = form_data['date_picker']
 				if date == "":
-					date_today = datetime.date.today()
+					date_today = datetime.datetime.now(pytz.timezone('US/Pacific'))
 					date_ordinal = date_today.isoweekday()
 					days_ahead = 6 - date_ordinal
 					if days_ahead <= 0:
 						days_ahead += 7
 					next_date = date_today+datetime.timedelta(days=days_ahead)
-					date = str(next_date)
+					date = str(next_date)[:10]
 				date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
 				if date > str(datetime.date.today()+datetime.timedelta(days=21\
 					)) or date_time.isoweekday() in range(1, 6)\
-					or date <= str(datetime.date.today()):
+					or date <= str(datetime.datetime.now(pytz.timezone('US/Pacific'))):
 					error = "Outside Date Range"
 					error_details = "You can not reserve spaces on a weekday\
 						and you can not reserve spaces more than 3 weeks ahead\
