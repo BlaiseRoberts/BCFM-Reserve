@@ -11,7 +11,8 @@
       <li><a href="{% url 'reserve:browse' %}">Admin Waiting Lists</a></li>      
       <li><a href="{% url 'reserve:browse' %}">Admin Reporting</a></li>      
       <li><a href="{% url 'reserve:browse' %}">Admin Staff</a></li>
-      <li><a href="{% url 'reserve:my_account' request.user.id %}"><i class="medium material-icons">perm_identity</i></a></li>            
+      <li><a href="{% url 'reserve:my_account' request.user.id %}"><i class="medium material-icons">perm_identity</i></a></li>
+      <li><a href="{% url 'reserve:logout' %}">Logout</a></li>            
       {%else%}
       <li><a href="{% url 'reserve:browse' %}">Spaces</a></li>
       <li><a href="{% url 'reserve:buildings' %}">Buildings</a></li>

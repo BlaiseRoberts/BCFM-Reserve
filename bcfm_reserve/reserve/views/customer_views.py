@@ -1,13 +1,14 @@
 from django.template import RequestContext
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseRedirect,\
+	HttpResponseForbidden
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 from reserve.forms import UserForm, LoginForm, ProfileForm, EditUserForm
-from .models import Reservation, Space, Building, SpaceType,\
-ReservationType, VacancyStatus, Parking, Profile
+from reserve.models import Reservation, Space, Building, SpaceType,\
+	ReservationType, VacancyStatus, Parking, Profile
 
 import datetime
 import pytz
