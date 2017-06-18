@@ -144,7 +144,7 @@ def browse(request, date=None):
 				status = reservations[0]
 				space.status = status
 			else:
-				space.status = 'Open'
+				space.status = {'reservation_type':'Open'}
 			spaces.append(space)
 
 		template_name = 'browse.html'
@@ -211,7 +211,7 @@ def space_details(request, space_id, date):
 				status = reservations[0]
 				space.status = status
 			else:
-				space.status = 'Open'
+				space.status = {'reservation_type':'Open'}
 			user_liked = False
 			user_disliked = False
 			likes_list = space.likes.all()

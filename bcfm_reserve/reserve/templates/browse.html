@@ -32,15 +32,28 @@
 				<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date space_type.pk%}</span>{{space_type.label}}</div>
 				<div class="collapsible-body collection teal lighten-4">
 					{%for space in spaces%}
-						{%if user.is_staff%}
 							{%if space.space_type.pk == space_type.pk%}
-				        	<a href="{% url 'reserve:admin_space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+				        	<a href="
+							{%if user.is_staff%}
+				        	{% url 'reserve:admin_space' space.id date %}
+				        	{%else%}
+							{% url 'reserve:space' space.id date %}
 							{%endif%}
-						{%else%}
-							{%if space.space_type.pk == space_type.pk%}
-				        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+				        	" class="collection-item"><span class="new badge
+							{%if space.status.reservation_type != "Open"%}
+							red
 							{%endif%}
-						{%endif%}
+				        	" data-badge-caption="{{space.status.reservation_type}}" style="margin-top:0;"></span>
+				        	{{space.title}}
+				        		{%if space.status.reservation_type != "Open"%} 
+						        	{%if space.status.hold_name%}
+						        	-- {{space.status.hold_name}}
+						        	{%else%}
+						        	-- {{space.status.customer.first_name}} {{space.status.customer.last_name}}
+						        	{%endif%}
+						        {%endif%}
+					        	</a>
+							{%endif%}
 			        {%endfor%}
 		      	</div>
 		    </li>
