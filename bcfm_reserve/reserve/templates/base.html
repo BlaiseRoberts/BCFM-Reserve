@@ -70,7 +70,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
 
 	{# INITIALIZE #}
-	<script type="text/javascript" src="{% static 'material_init.js' %}"></script>
+	{%if user.is_staff%}
+		<script type="text/javascript" src="{% static 'material_init_admin.js' %}"></script>
+	{%else%}
+		<script type="text/javascript" src="{% static 'material_init.js' %}"></script>
+	{%endif%}
 	<script type="text/javascript" src="{% static 'codepen.js' %}"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>

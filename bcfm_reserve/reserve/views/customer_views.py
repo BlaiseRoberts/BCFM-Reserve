@@ -96,19 +96,22 @@ def browse(request, date=None):
 		space_types = SpaceType.objects.filter(monthly=0)
 		spaces = []
 		if date:
-			date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
-			if date > str(datetime.date.today()+datetime.timedelta(days=21\
-					)) or date_time.isoweekday() in range(1, 6)\
-					or date <= str(datetime.date.today()):
-				error = "Outside Date Range"
-				error_details = "You can not reserve spaces on a weekday\
-					and you can not reserve spaces more than 3 weeks ahead or\
-					you may have selected a past date."
-				template_name = 'error.html'
+			if request.user.is_staff:
+				pass
+			else:
+				date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
+				if date > str(datetime.date.today()+datetime.timedelta(days=21\
+						)) or date_time.isoweekday() in range(1, 6)\
+						or date <= str(datetime.date.today()):
+					error = "Outside Date Range"
+					error_details = "You can not reserve spaces on a weekday\
+						and you can not reserve spaces more than 3 weeks ahead or\
+						you may have selected a past date."
+					template_name = 'error.html'
 
-				return render(request, template_name, {'error':error, 
-					'error_details':error_details})
-			pass
+					return render(request, template_name, {'error':error, 
+						'error_details':error_details})
+				pass
 		else:
 			if form_data:
 				date = form_data['date_picker']
@@ -120,18 +123,21 @@ def browse(request, date=None):
 						days_ahead += 7
 					next_date = date_today+datetime.timedelta(days=days_ahead)
 					date = str(next_date)[:10]
-				date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
-				if date > str(datetime.date.today()+datetime.timedelta(days=21\
-					)) or date_time.isoweekday() in range(1, 6)\
-					or date <= str(datetime.datetime.now(pytz.timezone('US/Pacific'))):
-					error = "Outside Date Range"
-					error_details = "You can not reserve spaces on a weekday\
-						and you can not reserve spaces more than 3 weeks ahead\
-						or you may have selected a past date."
-					template_name = 'error.html'
+				if request.user.is_staff:
+					pass
+				else:
+					date_time = datetime.datetime.strptime(date, '%Y-%m-%d')
+					if date > str(datetime.date.today()+datetime.timedelta(days=21\
+						)) or date_time.isoweekday() in range(1, 6)\
+						or date <= str(datetime.datetime.now(pytz.timezone('US/Pacific'))):
+						error = "Outside Date Range"
+						error_details = "You can not reserve spaces on a weekday\
+							and you can not reserve spaces more than 3 weeks ahead\
+							or you may have selected a past date."
+						template_name = 'error.html'
 
-					return render(request, template_name, {'error':error, 
-						'error_details':error_details})
+						return render(request, template_name, {'error':error, 
+							'error_details':error_details})
 		for space in all_spaces:
 			reservations = space.reservations.filter(date=date, reservation_type_id=1)
 			if reservations:
