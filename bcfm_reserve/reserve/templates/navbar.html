@@ -2,25 +2,26 @@
 <nav>
   <div class="nav-wrapper teal lighten-2">
   <div class="container">
-    <a href="/" class="brand-logo">BCFM</a>
+    <a href="/" class="brand-logo">
+      BCFM
+      {%if user.is_staff%}
+      - Admin
+      {%endif%}
+    </a>
     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
     {%if user.is_authenticated%}
-      {%if user.is_staff%}
-      <li><a href="{% url 'reserve:browse' %}">Admin Spaces</a></li>
-      <li><a href="{% url 'reserve:buildings' %}">Admin Waiting Lists</a></li>      
-      <li><a href="{% url 'reserve:browse' %}">Admin Reporting</a></li>      
-      <li><a href="{% url 'reserve:browse' %}">Admin Staff</a></li>
-      <li><a href="{% url 'reserve:my_account' request.user.id %}"><i class="medium material-icons">perm_identity</i></a></li>
-      <li><a href="{% url 'reserve:logout' %}">Logout</a></li>            
-      {%else%}
       <li><a href="{% url 'reserve:browse' %}">Spaces</a></li>
       <li><a href="{% url 'reserve:buildings' %}">Buildings</a></li>
+      {%if user.is_staff%}
+      <li><a href="{% url 'reserve:browse' %}">Reporting</a></li>      
+      <li><a href="{% url 'reserve:browse' %}">Staff</a></li>          
+      {%else%}
       <li><a href="{% url 'reserve:reservation' request.user.id %}">Reservations</a></li>
+      {%endif%}
       <li><a href="{% url 'reserve:rules' %}">Rules</a></li>
       <li><a href="{% url 'reserve:my_account' request.user.id %}"><i class="medium material-icons">perm_identity</i></a></li>
       <li><a href="{% url 'reserve:logout' %}">Logout</a></li>
-      {%endif%}
     {%else%}
       <li><a href="{% url 'reserve:login'  %}">Login</a></li>
       <li><a href="{% url 'reserve:register' %}">Register</a></li>

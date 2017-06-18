@@ -4,7 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect,\
 	HttpResponseForbidden
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+
+
 
 from reserve.forms import UserForm, LoginForm, ProfileForm, EditUserForm
 from reserve.models import Reservation, Space, Building, SpaceType,\
@@ -14,6 +16,7 @@ from django.contrib.auth.models import User
 import datetime
 import pytz
 
+@staff_member_required
 def admin_space_details(request, space_id, date):
 	if request.method == 'POST':
 		space = Space.objects.get(pk=space_id)
@@ -75,6 +78,7 @@ def admin_space_details(request, space_id, date):
 			return render(request, template_name, {'error':error, 
 				'error_details':error_details})
 
+@staff_member_required
 def admin_building_details(request, building_id):
 	try:
 		building = Building.objects.get(pk=building_id)
@@ -91,6 +95,7 @@ def admin_building_details(request, building_id):
 		return render(request, template_name, {'error':error, 
 			'error_details':error_details})
 
+@staff_member_required
 def remove_contact(request, building_id, user_id):
 	try:
 		building = Building.objects.get(pk=building_id)
