@@ -139,7 +139,7 @@ def browse(request, date=None):
 						return render(request, template_name, {'error':error, 
 							'error_details':error_details})
 		for space in all_spaces:
-			reservations = space.reservations.filter(date=date, reservation_type_id=1)
+			reservations = space.reservations.filter(date=date, reservation_type_id__in=[1,3,4])
 			if reservations:
 				status = reservations[0]
 				space.status = status
