@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
-from reserve.views import customer_views
+from reserve.views import customer_views, admin_views
 
 app_name = 'reserve'
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^buildings$', customer_views.buildings, name='buildings'),
     url(r'^building/(?P<building_id>[0-9]+)/$', customer_views.building_details, name='building_details'),
     url(r'^space/(?P<space_id>[0-9]+)/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', customer_views.space_details, name='space'),
+    url(r'^admin_space/(?P<space_id>[0-9]+)/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', admin_views.admin_space_details, name='admin_space'),
     url(r'^myaccount/(?P<user_id>[0-9]+)/$', customer_views.account, name='my_account'),
     url(r'^edit_myaccount/(?P<user_id>[0-9]+)/$', customer_views.edit_account, name='edit_account'),
     url(r'^myreservations/(?P<user_id>[0-9]+)/$', customer_views.reservation, name='reservation'),

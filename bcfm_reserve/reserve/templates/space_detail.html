@@ -6,7 +6,11 @@
       <h3 class="modal-header">Reserve {{space.title}}</h3>
       <div class="row">
 		<div class="input-field col s12">
+			{%if user.is_staff%}
+			<p class="flow-text">Are you sure you would like to pay for {{space.title}} on {{date}}?</p>
+			{%else%}
 			<p class="flow-text">Are you sure you would like to reserve {{space.title}} on {{date}}?  (You reservation will be held untill 9am on the date of your reservation)</p>
+			{%endif%}
 		</div>
       </div>	
     </div>
@@ -14,11 +18,13 @@
 		<form method="POST" action= "">
 		  {% csrf_token %}
 		  <div class="center-align">
-		  <input class="btn btn-flat modal-action modal-close" type="submit" value="Confirm Reservation"/>
+		  <input class="btn btn-flat modal-action modal-close" type="submit" value="Confirm"/>
 		  </div>
 		</form>
 	</div>
   </div>
+
+
 <div class="card-panel teal darken-2">
 	<h1 class="center-align white-text">Space {{space.title}} in {{space.space_type}}</h1>
 
@@ -50,25 +56,36 @@
 		  {%if user.is_authenticated%}
 		  <div class="right-align" style="margin:1rem;">
 			{%if space.status == "Open"%}
+				{%if user.is_staff%}
+				<a class="modal-trigger waves-effect waves-light btn teal darken-2" style="margin:1rem;" href="#reservationModal">Pay in Person</a>
+				{%else%}
 		  		<a class="modal-trigger waves-effect waves-light btn teal darken-2" style="margin:1rem;" href="#reservationModal">Reserve</a>
+				{%endif%}
 		  	{%endif%}
 		  	<form method="POST" action= "">
                 {% csrf_token %}
-                <div class="left-align">
-                    <input class="btn blue darken-2" name="like_dislike_button" type="submit" value="Like" style="margin-right:5px">
-                    <input class="btn red darken-2" name="like_dislike_button" type="submit" value="Dislike">
-                </div>
+                {%if user.is_staff%}
+                	<div class="left-align">
+	                    <input class="btn blue darken-2" name="cancel_confirm_button" type="submit" value="Confirm" style="margin-right:5px">
+	                    <input class="btn red darken-2" name="cancel_confirm_button" type="submit" value="Cancel">
+	                </div>
+                {%else%}
+	                <div class="left-align">
+	                    <input class="btn blue darken-2" name="like_dislike_button" type="submit" value="Like" style="margin-right:5px">
+	                    <input class="btn red darken-2" name="like_dislike_button" type="submit" value="Dislike">
+	                </div>
+	            {%endif%}
             </form>
             <div class="center-align" style="margin:1rem;">
 				<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
 			</div>
 		  </div>
-		  {%else%}
-		  	<div class="center-align" style="margin:1rem;">
-				<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
-			</div>
-		  </div>
-		</div>
+		{%else%}
+  	<div class="center-align" style="margin:1rem;">
+		<a class="btn btn-flat waves-effect waves-teal" href="{% url 'reserve:browse' date %}">Back to Browse for {{date}}</a>
+	</div>
+  </div>
+</div>
 			<div class="row card-panel teal darken-2">
 				<p class="flow-text center-align white-text">Login or Register Below to Start Reserving Spaces</p>
 				<div class="col s6 center-align" style="padding-top:2rem; padding-bottom: 2rem;">
@@ -78,9 +95,7 @@
 					<a class="btn waves-effect blue pulse" href="{% url 'reserve:register' %}">Register</a>
 				</div>
 			</div>
-			{%endif%}
-	
-		
+		{%endif%}
 	</div>
 </div>
 {%endblock%}

@@ -32,8 +32,14 @@
 				<div class="collapsible-header flow-text center-align"><span class="new badge cyan darken-2" data-badge-caption="Open">{%get_open_count date space_type.pk%}</span>{{space_type.label}}</div>
 				<div class="collapsible-body collection teal lighten-4">
 					{%for space in spaces%}
-						{%if space.space_type.pk == space_type.pk%}
-			        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+						{%if user.is_staff%}
+							{%if space.space_type.pk == space_type.pk%}
+				        	<a href="{% url 'reserve:admin_space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+							{%endif%}
+						{%else%}
+							{%if space.space_type.pk == space_type.pk%}
+				        	<a href="{% url 'reserve:space' space.id date %}" class="collection-item">{{space.title}} is {{space.status}}</a>
+							{%endif%}
 						{%endif%}
 			        {%endfor%}
 		      	</div>
