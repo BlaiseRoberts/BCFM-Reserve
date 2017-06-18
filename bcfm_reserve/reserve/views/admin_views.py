@@ -76,7 +76,7 @@ def admin_space_details(request, space_id, date):
 				status = reservations[0]
 				space.status = status
 			else:
-				space.status = 'Open'
+				space.status = {'reservation_type':'Open'}
 
 			template_name = 'space_detail.html'
 

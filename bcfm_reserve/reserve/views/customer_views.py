@@ -206,7 +206,7 @@ def space_details(request, space_id, date):
 	elif request.method == 'GET':
 		try:
 			space = Space.objects.get(pk=space_id)
-			reservations = space.reservations.filter(date=date, reservation_type_id=1)
+			reservations = space.reservations.filter(date=date, reservation_type_id__in=[1,3,4])
 			if reservations:
 				status = reservations[0]
 				space.status = status
