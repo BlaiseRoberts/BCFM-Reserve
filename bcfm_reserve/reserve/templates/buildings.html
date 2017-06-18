@@ -34,7 +34,11 @@
 		<i><p class="flow-text center-align">Buildings are rented by the month.</p></i> 
 		<p class="flow-text">You must visit the Bell Co. Flea Market in person to fill out contracts begin renting the building, but you can add your info to wait lists to be contacted when a building become available.</p>
 		<div class="center-align">
+		{%if user.is_staff%}
+		<p class="flow-text blue-text text-darken-2">Click a building to see its waiting list</p>
+		{%else%}
 		  <a class="modal-trigger waves-effect waves-light btn teal darken-3" href="#waitListModal">Add to Wait List for Weekly Access</a>
+		{%endif%}
 		</div>
 	</div>
 </div>
@@ -50,7 +54,11 @@
 				<div class="collapsible-body collection teal lighten-4">
 					{%for building in buildings%}
 						{%if building.space_type.pk == building_type.pk%}
+						{%if user.is_staff%}
+						<a href="{% url 'reserve:admin_building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
+						{%else%}
 			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
+			        	{%endif%}
 						{%endif%}
 			        {%endfor%}
 	      		</div>

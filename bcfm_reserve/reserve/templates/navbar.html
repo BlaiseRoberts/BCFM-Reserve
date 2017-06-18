@@ -8,7 +8,7 @@
     {%if user.is_authenticated%}
       {%if user.is_staff%}
       <li><a href="{% url 'reserve:browse' %}">Admin Spaces</a></li>
-      <li><a href="{% url 'reserve:browse' %}">Admin Waiting Lists</a></li>      
+      <li><a href="{% url 'reserve:buildings' %}">Admin Waiting Lists</a></li>      
       <li><a href="{% url 'reserve:browse' %}">Admin Reporting</a></li>      
       <li><a href="{% url 'reserve:browse' %}">Admin Staff</a></li>
       <li><a href="{% url 'reserve:my_account' request.user.id %}"><i class="medium material-icons">perm_identity</i></a></li>

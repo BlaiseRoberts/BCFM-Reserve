@@ -35,18 +35,25 @@
 		<p>Deposit:  ${{building.deposit}}.00</p>
 		<p>Parking:  {{building.parking}}</p>
 		{%if user.is_authenticated%}
-		{%if on_list%}
-		{%else%}
-			{%if building.vacancy_status_id == 2%}
-				  <div class="right-align">
-				  <a style="margin:1rem;" class="modal-trigger waves-effect waves-light btn teal darken-3" href="#waitListModal">Add to Wait List</a>
-				  </div>
+			{%if user.is_staff%}
+				<ul class="collection">
+					{%for contact in contact_list%}
+					<li class="collection-item"><div>{{contact.first_name}} {{contact.last_name}} - {{contact.profile.phone}}<a href="{% url 'reserve:remove_contact' building.id contact.id%}" class="secondary-content"><i class="red-text text-darken-2 material-icons">delete</i></a></div></li>
+					{%endfor%}
+				</ul>
+			{%else%}
+				{%if on_list%}
+				{%else%}
+					{%if building.vacancy_status_id == 2%}
+						  <div class="right-align">
+						  <a style="margin:1rem;" class="modal-trigger waves-effect waves-light btn teal darken-3" href="#waitListModal">Add to Wait List</a>
+						  </div>
+					{%endif%}
+				{%endif%}
 			{%endif%}
-		{%endif%}
-		
 		{%else%}
-		</div>
-		</div>
+	</div>
+</div>
 <div class="row card-panel teal darken-2">
 	<p class="flow-text center-align white-text">Login or Register Below to Add Your Info to a Wait List</p>
 	<div class="col s6 center-align" style="padding-top:2rem; padding-bottom: 2rem;">

@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from reserve.forms import UserForm, LoginForm, ProfileForm, EditUserForm
 from reserve.models import Reservation, Space, Building, SpaceType,\
 	ReservationType, VacancyStatus, Parking, Profile
+from django.contrib.auth.models import User
 
 import datetime
 import pytz
@@ -73,3 +74,45 @@ def admin_space_details(request, space_id, date):
 
 			return render(request, template_name, {'error':error, 
 				'error_details':error_details})
+
+def admin_building_details(request, building_id):
+	try:
+		building = Building.objects.get(pk=building_id)
+		template_name = 'building_detail.html'
+		contact_list = building.contact_list.all()
+		return render(request, template_name, {'building':building,
+				'contact_list':contact_list})
+	except:
+		error = "Building does not Exist"
+		error_details = "You're trying to view a building that doesn't\
+			exist."
+		template_name = 'error.html'
+
+		return render(request, template_name, {'error':error, 
+			'error_details':error_details})
+
+def remove_contact(request, building_id, user_id):
+	try:
+		building = Building.objects.get(pk=building_id)
+		customer = User.objects.get(pk=user_id)
+		building.contact_list.remove(customer)
+		template_name = 'building_detail.html'
+		contact_list = building.contact_list.all()
+		return render(request, template_name, {'building':building,
+				'contact_list':contact_list})
+	except:
+		error = "Building or User does not Exist"
+		error_details = "You're trying to view a building or user that doesn't\
+			exist."
+		template_name = 'error.html'
+
+		return render(request, template_name, {'error':error, 
+			'error_details':error_details})
+
+
+
+
+
+
+
+
