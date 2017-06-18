@@ -155,6 +155,7 @@ class Reservation (models.Model):
         on_delete=models.CASCADE, related_name="reservations")
 	date = models.DateField()
 	reservation_type = models.ForeignKey(ReservationType, related_name='reservations')
+	hold_name = models.CharField(max_length=30, blank=True, null=True)
 
 	def __str__(self):
 		return "{} {} by {} {}".format(self.space, self.reservation_type, self.customer.first_name, self.customer.last_name, self.date)

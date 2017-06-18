@@ -7,10 +7,21 @@
       <div class="row">
 		<div class="input-field col s12">
 			{%if user.is_staff%}
-			<p class="flow-text">Are you sure you would like to pay for {{space.title}} on {{date}}?</p>
+			<p class="flow-text">Would you like to reserve or pay for {{space.title}} on {{date}}?</p>
+		</div>
+  	  </div>	
+		<form method="POST" action= "">
+		  {% csrf_token %}
+		  {{reservation_form.as_p}}
+		  <div class="center-align">
+		  <input class="btn teal darken-2 modal-action modal-close" name="pay_reserve_button" type="submit" value="Pay"/>
+		  <input class="btn blue darken-2 modal-action modal-close" name="pay_reserve_button" type="submit" value="Reserve">
+		  </div>
+		</form>
+	</div>
+</div>
 			{%else%}
 			<p class="flow-text">Are you sure you would like to reserve {{space.title}} on {{date}}?  (You reservation will be held untill 9am on the date of your reservation)</p>
-			{%endif%}
 		</div>
       </div>	
     </div>
@@ -23,7 +34,7 @@
 		</form>
 	</div>
   </div>
-
+			{%endif%}
 
 <div class="card-panel teal darken-2">
 	<h1 class="center-align white-text">Space {{space.title}} in {{space.space_type}}</h1>
@@ -57,7 +68,7 @@
 		  <div class="right-align" style="margin:1rem;">
 			{%if space.status == "Open"%}
 				{%if user.is_staff%}
-				<a class="modal-trigger waves-effect waves-light btn teal darken-2" style="margin:1rem;" href="#reservationModal">Pay in Person</a>
+				<a class="modal-trigger waves-effect waves-light btn teal darken-2" style="margin:1rem;" href="#reservationModal">Pay/Reserve</a>
 				{%else%}
 		  		<a class="modal-trigger waves-effect waves-light btn teal darken-2" style="margin:1rem;" href="#reservationModal">Reserve</a>
 				{%endif%}

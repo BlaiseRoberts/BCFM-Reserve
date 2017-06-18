@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Reservation
 
 
 class UserForm(forms.ModelForm):
@@ -70,4 +70,18 @@ class LoginForm(forms.ModelForm):
             'username':None,
         }
         fields = ('username', 'password',)
+
+class ReservationForm(forms.ModelForm):
+    """
+    This class represents an HTML form to login and authenticate users.
+    ----Fields----
+    - email
+    - first_name
+    - last_name
+    Author: Beve Strownlee
+    """
+
+    class Meta:
+        model = Reservation
+        fields = ('hold_name',)
         
