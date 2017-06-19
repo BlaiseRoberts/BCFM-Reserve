@@ -54,11 +54,13 @@
 				<div class="collapsible-body collection teal lighten-4">
 					{%for building in buildings%}
 						{%if building.space_type.pk == building_type.pk%}
+						<a href="
 						{%if user.is_staff%}
-						<a href="{% url 'reserve:admin_building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
+						{% url 'reserve:admin_building_details' building.id%}
 						{%else%}
-			        	<a href="{% url 'reserve:building_details' building.id%}" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
-			        	{%endif%}
+						{% url 'reserve:building_details' building.id%}
+						{%endif%}
+						" class="collection-item">{{building.title}}<span class="secondary-content">Weekly Access: {{building.weekly_access}}</span> is {{building.vacancy_status}}.</a>
 						{%endif%}
 			        {%endfor%}
 	      		</div>
