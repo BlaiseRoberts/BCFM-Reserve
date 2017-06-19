@@ -30,7 +30,9 @@
 				  </div>
 
 
-		        	<li class="collection-item"><a href="{% url 'reserve:space' reservation.space.id reservation.date %}">{{reservation.reservation_type}} {{reservation.space}} on {{reservation.date}}</a>
+		        	<li class="collection-item"><a href="
+		        	{% url 'reserve:space' reservation.space.id reservation.date %}
+		        	">{{reservation.reservation_type}} {{reservation.space}} on {{reservation.date}}</a>
 		        	<a href="#reservationModal{{reservation.id}}" class="secondary-content modal-trigger waves-effect waves-light"><i class="material-icons red-text text-darken-2">delete</i></a>
 		        	</li>
 		        {%endfor%}

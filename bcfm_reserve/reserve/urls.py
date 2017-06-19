@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^admin_reservations/$', admin_views.admin_reservation, name='admin_reservation'),
     url(r'^user_permissions/$', admin_views.user_permissions, name='user_permissions'),
     url(r'^reporting/$', admin_views.reporting, name='reporting'),
-
+    url(r'^reporting/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', admin_views.reporting, name='reporting'),
 ]
 
 if settings.DEBUG:

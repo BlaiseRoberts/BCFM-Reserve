@@ -19,7 +19,6 @@ def index(request):
 		print(liked_spaces)
 	except:
 		liked_spaces = []
-		print("Anon User")
 
 	recommended_spaces = []
 	space_types = set()
