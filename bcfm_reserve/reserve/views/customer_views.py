@@ -283,9 +283,7 @@ def edit_account(request, user_id):
 				'error_details':error_details})
 
 def reservation(request, user_id):
-	if request.method == 'POST':
-		pass
-	elif request.method == 'GET':
+	if request.method == 'GET':
 		reservations = Reservation.objects.filter(customer_id=user_id).order_by('-date')[:12]
 		template_name = 'reservation.html'
 		return render(request, template_name, {'reservations':reservations})

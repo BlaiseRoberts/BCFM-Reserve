@@ -3,6 +3,7 @@ $( document ).ready(function(){
   	$(".button-collapse").sideNav();
   	$('.collapsible').collapsible();
   	$('.materialboxed').materialbox();
+  	$('select').material_select();
   	$('.datepicker').pickadate({
 		selectMonths: true,
 		selectYears: 1, 
