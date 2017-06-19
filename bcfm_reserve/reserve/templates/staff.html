@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="card-panel teal lighten-5 center-align">
+	<h1>Staff</h1>
+	<a href="{% url 'reserve:user_permissions' %}" class="btn teal darken-2 waves-effect waves-light">Change User Permissions</a>
+</div>
+<div class="row">
+	<div class="col s6 card-panel teal lighten-3">
+		<p class="flow-text center-align">All Reservations</p>
+			<ul class="collection">
+				{%for reservation in reservations%}				
+		        	<li class="collection-item"><a href="{% url 'reserve:space' reservation.space.id reservation.date %}">{{reservation.reservation_type}} {{reservation.space}} for {{reservation.date}} by {{reservation.customer}}</a>
+		        	</li>
+		        {%endfor%}
+	      	</ul>
+	</div>
+	<div class="col s6 card-panel blue-grey lighten-4" style="display:flex;flex-direction:column;align-items:center;padding-bottom:2em;">
+		<p class="flow-text">Full Map</p>
+		<img class="materialboxed" width="200px" src="/images/flea-map.png">
+	</div>
+</div>
+{%endblock%}

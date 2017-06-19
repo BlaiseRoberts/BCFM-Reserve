@@ -126,6 +126,42 @@ def remove_contact(request, building_id, user_id):
 		return render(request, template_name, {'error':error, 
 			'error_details':error_details})
 
+@staff_member_required
+def admin_reservation(request):
+	if request.method == 'GET':
+		users = User.objects.filter(is_staff=True)
+		reservations= []
+		for user in users:
+			user_reservations = Reservation.objects.filter(customer=user).order_by('-date')[:20]
+			for reservation in user_reservations:
+				reservations.append(reservation)
+		template_name = 'staff.html'
+		return render(request, template_name, {'reservations':reservations})
+
+@staff_member_required
+def user_permissions(request):
+	if request.method == 'POST':
+		admin_button = request.POST.get("admin_button", "")
+		if admin_button == "Make Admin":
+			user_id = request.POST['user_select']
+			user = User.objects.get(pk=user_id)
+			user.is_staff = True
+			user.is_admin = True
+			user.save()
+		if admin_button == "Remove Admin":
+			user_id = request.POST['user_select']
+			user = User.objects.get(pk=user_id)
+			user.is_staff = False
+			user.is_admin = False
+			user.save()
+		users = User.objects.all()
+		template_name = 'make_admin.html'
+		return render(request, template_name, {'users':users})
+
+	if request.method == 'GET':
+		users = User.objects.all()
+		template_name = 'make_admin.html'
+		return render(request, template_name, {'users':users})
 
 
 

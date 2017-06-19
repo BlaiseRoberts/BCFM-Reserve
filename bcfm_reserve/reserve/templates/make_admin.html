@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content%}
+		<div class="card-panel teal lighten-3 center-align">
+        	<h1>Change User Permissions</h1>
+		</div>
+
+		<div class="card-panel teal lighten-4">
+        <p class="flow-text">Select a user below to add or remove their permissions</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-field col s12">
+                <select name="user_select" id="user_select">
+                  <optgroup label="Admin">
+                    {%for user in users%}
+                        {%if user.is_staff%}
+                            <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+                        {%endif%}
+                    {%endfor%}
+                  </optgroup>
+                  <optgroup label="Users">
+                    {%for user in users%}
+                        {%if user.is_staff%}
+                        {%else%}
+                            <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+                        }
+                        {%endif%}
+                    {%endfor%}
+                  </optgroup>
+                </select>
+                <label>Users</label>
+              </div>
+        <div class="right-align">
+            <input class="btn green"
+             type="submit" name="admin_button" value="Make Admin" />
+            <input class="btn red darken-2"
+             type="submit" name="admin_button" value="Remove Admin" />
+        </div>
+        </form>
+        </div>
+{% endblock %}
