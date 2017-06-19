@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <div class="card-panel teal lighten-3 center-align">
+          <h1>Reporting</h1>
+    </div>
+
+    <div class="card-panel teal lighten-5">
+        <p></p>
+        <canvas></canvas>
+    </div>
+
+
+
+<script>
+
+var canvas = document.querySelector("canvas"),
+    context = canvas.getContext("2d");
+
+var width = canvas.width,
+    height = canvas.height,
+    radius = Math.min(width, height) / 2;
+
+var colors = ["#ce93d8", "#4db6ac"];
+
+var arc = d3.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0)
+    .context(context);
+
+var labelArc = d3.arc()
+    .outerRadius(radius - 40)
+    .innerRadius(radius - 40)
+    .context(context);
+
+var pie = d3.pie()
+    .sort(null)
+    .value(function(d) { return d.count; });
+
+context.translate(width / 2, height / 2);
+
+var data = [
+  {label:'Occupied',count:{{occupied_count}}},
+  {label:'Vacant',count:{{open_space_count}}}
+ ];
+
+var arcs = pie(data);
+
+console.log(arcs)
+arcs.forEach(function(d, i) {
+  context.beginPath();
+  arc(d);
+  context.fillStyle = colors[i];
+  context.fill();
+});
+
+context.beginPath();
+arcs.forEach(arc);
+context.strokeStyle = "#fff";
+context.stroke();
+
+context.textAlign = "center";
+context.textBaseline = "middle";
+context.fillStyle = "#000";
+arcs.forEach(function(d) {
+  var c = labelArc.centroid(d);
+  context.fillText(d.data.label, c[0], c[1]);
+});
+
+
+</script>
+
+{% endblock %}
+
+
+
+

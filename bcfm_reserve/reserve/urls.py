@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^delete_reservation/(?P<reservation_id>[0-9]+)/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', customer_views.delete_reservation, name='delete_reservation'),
     url(r'^admin_reservations/$', admin_views.admin_reservation, name='admin_reservation'),
     url(r'^user_permissions/$', admin_views.user_permissions, name='user_permissions'),
+    url(r'^reporting/$', admin_views.reporting, name='reporting'),
 
 ]
 

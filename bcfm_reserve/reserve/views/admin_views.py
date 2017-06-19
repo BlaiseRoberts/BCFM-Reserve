@@ -163,8 +163,29 @@ def user_permissions(request):
 		template_name = 'make_admin.html'
 		return render(request, template_name, {'users':users})
 
+@staff_member_required
+def reporting(request):
+	date_today = datetime.datetime.now(pytz.timezone('US/Pacific'))
+	date_ordinal = date_today.isoweekday()
+	days_ahead = 6 - date_ordinal
+	if days_ahead == -1:
+		days_ahead += 7
+	next_date = date_today+datetime.timedelta(days=days_ahead)
+	date = str(next_date)[:10]
+	all_spaces = Space.objects.all()
+	open_space_count = 0
+	occupied_count = 0
+	for space in all_spaces:
+		reservations = space.reservations.filter(date=date, reservation_type_id__in=[1,3,4])
+		if reservations:
+			occupied_count += 1
+		else:
+			open_space_count += 1
 
+	template_name = 'reporting.html'
 
+	return render(request, template_name, {'occupied_count':occupied_count,
+		'open_space_count':open_space_count,'date':date})
 
 
 

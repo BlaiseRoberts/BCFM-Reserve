@@ -14,7 +14,7 @@
       <li><a href="{% url 'reserve:browse' %}">Spaces</a></li>
       <li><a href="{% url 'reserve:buildings' %}">Buildings</a></li>
       {%if user.is_staff%}
-      <li><a href="{% url 'reserve:browse' %}">Reporting</a></li>      
+      <li><a href="{% url 'reserve:reporting' %}">Reporting</a></li>      
       <li><a href="{% url 'reserve:admin_reservation' %}">Staff</a></li>          
       {%else%}
       <li><a href="{% url 'reserve:reservation' request.user.id %}">Reservations</a></li>
