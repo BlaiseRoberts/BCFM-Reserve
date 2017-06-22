@@ -5,5 +5,5 @@ This is a Python/Django Web App that was designed for the Bell Co. Flea Market. 
 This application was built with Python, Django, Gunicorn, Nginx, D3.js, and Let's Encrypt.
 
 ## Setup Project
-This project is with Nginx and Gunicorn.
+This project is hosted with Nginx and Gunicorn.
 You can view the site at [bcfmreserve.com](http://www.bcfmreserve.com/)
