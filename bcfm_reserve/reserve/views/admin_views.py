@@ -19,6 +19,22 @@ import pytz
 
 @staff_member_required
 def admin_space_details(request, space_id, date):
+	"""
+    Handles the admin space_detail page
+    ---Arguments---
+    date : date selected to view
+    space_id : pk of current space
+    ---GET---
+    Renders space_detail.html
+        ---Context---
+        'space': current space
+        'date': the date you wish to view reservations for
+        'reservation_form': form used to enter a hold_name for an in person cutomer
+	---POST---
+	- creates or updates reservation
+
+    Author: Blaise Roberts
+    """
 	if request.method == 'POST':
 		reservation_form = ReservationForm(request.POST)
 		space = Space.objects.get(pk=space_id)
@@ -92,6 +108,18 @@ def admin_space_details(request, space_id, date):
 
 @staff_member_required
 def admin_building_details(request, building_id):
+	"""
+    Handles the admin building_details page
+    ---Arguments---
+    building_id : pk fo the selected building
+    ---GET---
+    Renders building_details.html
+        ---Context---
+        'building': current building
+        'contact_list': all users on waiting list
+    
+    Author: Blaise Roberts
+    """
 	try:
 		building = Building.objects.get(pk=building_id)
 		template_name = 'building_detail.html'
@@ -109,6 +137,16 @@ def admin_building_details(request, building_id):
 
 @staff_member_required
 def remove_contact(request, building_id, user_id):
+	"""
+	Handles deleting user from contact_list
+    ---Arguments---
+    building_id : pk of current building
+    user_id : pk of the user you'd like to remove
+    
+	Removes user from contact_list
+
+    Author: Blaise Roberts
+    """
 	try:
 		building = Building.objects.get(pk=building_id)
 		customer = User.objects.get(pk=user_id)
@@ -128,6 +166,16 @@ def remove_contact(request, building_id, user_id):
 
 @staff_member_required
 def admin_reservation(request):
+	"""
+    Handles the admin reservation page
+    ---Arguments---
+    ---GET---
+    Renders staff.html
+        ---Context---
+        'reservations': latest dated reservations for all admin users(20)
+    
+    Author: Blaise Roberts
+    """
 	if request.method == 'GET':
 		users = User.objects.filter(is_staff=True)
 		reservations= []
@@ -140,6 +188,18 @@ def admin_reservation(request):
 
 @staff_member_required
 def user_permissions(request):
+	"""
+    Handles the make_admin page
+    ---Arguments---
+    ---GET---
+    Renders make_admin.html
+        ---Context---
+        'users': all users
+	---POST---
+	- adds or removes admin permissions
+
+    Author: Blaise Roberts
+    """
 	if request.method == 'POST':
 		admin_button = request.POST.get("admin_button", "")
 		if admin_button == "Make Admin":
@@ -165,6 +225,25 @@ def user_permissions(request):
 
 @staff_member_required
 def reporting(request, date=None):
+	"""
+    Handles the reporting page
+    ---Arguments---
+    date : date you'd like to view results from
+    ---GET---
+    Renders reporting.html
+        ---Context---
+        'occupied_count'(int): count of occupied spaces
+        'open_space_count'(int) : count of open spaces
+        'date'(int) : date we are querying for
+        'reserved_count'(int): count of reservation types that are "Reserved"
+        'cancelled_count'(int): count of reservation types that are "Cancelled"
+        'paid_count'(int): count of reservation types that are "Paid"
+        'confirmed_count'(int): count of reservation types that are "Confirmed"
+	---POST---
+	- adds or removes admin permissions
+
+    Author: Blaise Roberts
+    """
 	form_data = request.GET
 	date_today = datetime.datetime.now(pytz.timezone('US/Pacific'))
 	if date:

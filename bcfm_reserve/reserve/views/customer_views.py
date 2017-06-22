@@ -14,6 +14,18 @@ import datetime
 import pytz
 
 def index(request):
+	"""
+    Handles the splash page
+    ---Arguments---
+    None
+    ---GET---
+    Renders index.html
+        ---Context---
+        'spaces': liked spaces that are open for next date
+        'next_date': the date of the next Saturday
+        'space_types': types of spaces that are open
+    Author: Blaise Roberts
+    """
 	try:
 		liked_spaces = request.user.likes.all()
 		print(liked_spaces)
@@ -41,11 +53,34 @@ def index(request):
 		'next_date':str(next_date)[:10], 'space_types':space_types})
 
 def rules(request):
+	"""
+    Handles the rules page
+    ---Arguments---
+    None
+    ---GET---
+    Renders rules.html
+
+    Author: Blaise Roberts
+    """
 	template_name = 'rules.html'
 
 	return render(request, template_name, {})
 
 def buildings(request):
+	"""
+    Handles the buildings page
+    ---Arguments---
+    None
+    ---GET---
+    Renders buildings.html
+        ---Context---
+        'buildings': all buildings
+        'building_types': all SpaceTypes that are monthly
+    ---POST---
+    Adds users to waiting list for all buildings with weekly access
+
+    Author: Blaise Roberts
+    """
 	if request.method == 'POST':
 		buildings = Building.objects.filter(weekly_access=True)
 		for building in buildings:
@@ -61,6 +96,20 @@ def buildings(request):
 			'building_types':building_types})
 
 def building_details(request, building_id):
+	"""
+    Handles the building_details page
+    ---Arguments---
+    building_id : pk fo the selected building
+    ---GET---
+    Renders building_details.html
+        ---Context---
+        'building': current building
+        'on_list': boolean to show if user is on the list
+    ---POST---
+	Adds user to the waiting list for current building
+    
+    Author: Blaise Roberts
+    """
 	if request.method == 'POST':
 		building = Building.objects.get(pk=building_id)
 		building.contact_list.add(request.user)
@@ -89,6 +138,19 @@ def building_details(request, building_id):
 				'error_details':error_details})
 
 def browse(request, date=None):
+	"""
+    Handles the browse page
+    ---Arguments---
+    date : date selected to view
+    ---GET---
+    Renders browse.html
+        ---Context---
+        'spaces': all spaces
+        'date': the date you wish to view reservations for
+        'space_types': list of all SpaceTypes that are not monthly
+
+    Author: Blaise Roberts
+    """
 	if request.method == 'GET':
 		form_data = request.GET
 		all_spaces = Space.objects.all()
@@ -152,6 +214,24 @@ def browse(request, date=None):
 			'space_types':space_types})
 
 def space_details(request, space_id, date):
+	"""
+    Handles the space_detail page
+    ---Arguments---
+    date : date selected to view
+    space_id : pk of current space
+    ---GET---
+    Renders space_detail.html
+        ---Context---
+        'space': current space
+        'date': the date you wish to view reservations for
+        'user_liked': boolean to show if user liked
+        'user_disliked': boolean to show if user disliked
+	---POST---
+	- likes/dislikes space
+	- creates or updates reservation
+
+    Author: Blaise Roberts
+    """
 	if request.method == 'POST':
 		space = Space.objects.get(pk=space_id)
 
@@ -233,6 +313,17 @@ def space_details(request, space_id, date):
 				'error_details':error_details})
 
 def account(request, user_id):
+	"""
+    Handles the account page
+    ---Arguments---
+    user_id : pk of current user
+    ---GET---
+    Renders account.html
+        ---Context---
+        'profile': current user's profile
+
+    Author: Blaise Roberts
+    """
 	if str(request.user.id) == user_id:
 		profile = Profile.objects.get(user_id=user_id)
 		template_name = 'account.html'
@@ -246,6 +337,20 @@ def account(request, user_id):
 			'error_details':error_details})
 
 def edit_account(request, user_id):
+	"""
+    Handles the edit_account page
+    ---Arguments---
+    user_id : pk of current user
+    ---GET---
+    Renders edit_account.html
+        ---Context---
+        'profile_form': form for profile
+        'user_form': form for user
+    ---POST---
+    updates user's info and profile info
+
+    Author: Blaise Roberts
+    """
 	if request.method == 'POST':
 		user_form = EditUserForm(request.POST)
 		profile_form = ProfileForm(request.POST)
@@ -282,12 +387,33 @@ def edit_account(request, user_id):
 				'error_details':error_details})
 
 def reservation(request, user_id):
+	"""
+    Handles the reservation page
+    ---Arguments---
+    user_id : pk of current user
+    ---GET---
+    Renders reservation.html
+        ---Context---
+        'reservations': latest dated reservations for current user(12)
+    
+    Author: Blaise Roberts
+    """
 	if request.method == 'GET':
 		reservations = Reservation.objects.filter(customer_id=user_id).order_by('-date')[:12]
 		template_name = 'reservation.html'
 		return render(request, template_name, {'reservations':reservations})
 
 def delete_reservation(request, reservation_id, date):
+	"""
+	Handles deleting reservations
+    ---Arguments---
+    reservation_id : pk of current reservation
+    date : the date of the reservation you'd like to delete
+    
+    Changes the reservation.reservation_type to 'Cancelled'
+    
+    Author: Blaise Roberts
+    """
 	r = Reservation.objects.get(pk=reservation_id, date=date)
 	reservation_type = ReservationType.objects.get(pk=2)
 	if request.user == r.customer:

@@ -73,12 +73,10 @@ class LoginForm(forms.ModelForm):
 
 class ReservationForm(forms.ModelForm):
     """
-    This class represents an HTML form to login and authenticate users.
+    This class represents an HTML form to add a hold_name to a reservation.
     ----Fields----
-    - email
-    - first_name
-    - last_name
-    Author: Beve Strownlee
+    - hold_name
+    Author: Blaise Roberts
     """
 
     class Meta:
