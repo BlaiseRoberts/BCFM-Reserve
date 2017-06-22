@@ -31,17 +31,28 @@
     {%endif%}
     </ul>
   </div>
-    <ul class="side-nav" id="mobile-demo">
-    {%if user.is_authenticated%}
-      <li><a href="mobile.html">Browse</a></li>
-      <li><a href="collapsible.html">My Account</a></li>
-      <li><a href="mobile.html">My Reservations</a></li>
-      <li><a href="sass.html">Logout</a></li>
-    {%else%}
-      <li><a href="sass.html">Login</a></li>
-      <li><a href="badges.html">Register</a></li>
-    {%endif%}
-    </ul>
+    
   </div>
 </nav>
 </div>
+<ul class="side-nav" id="mobile-demo">
+    {%if user.is_authenticated%}
+      <li><a href="{% url 'reserve:browse' %}">Spaces</a></li>
+      <li><a href="{% url 'reserve:buildings' %}">Buildings</a></li>
+      {%if user.is_staff%}
+      <li><a href="{% url 'reserve:reporting' %}">Reporting</a></li>      
+      <li><a href="{% url 'reserve:admin_reservation' %}">Staff</a></li>          
+      {%else%}
+      <li><a href="{% url 'reserve:reservation' request.user.id %}">Reservations</a></li>
+      {%endif%}
+      <li><a href="{% url 'reserve:rules' %}">Rules</a></li>
+      <li><a href="{% url 'reserve:my_account' request.user.id %}"><i class="medium material-icons">perm_identity</i></a></li>
+      <li><a href="{% url 'reserve:logout' %}">Logout</a></li>
+    {%else%}
+      <li><a href="{% url 'reserve:login'  %}">Login</a></li>
+      <li><a href="{% url 'reserve:register' %}">Register</a></li>
+      <li><a href="{% url 'reserve:rules' %}">Rules</a></li>
+      <li><a href="{% url 'reserve:browse' %}">Spaces</a></li>
+      <li><a href="{% url 'reserve:buildings' %}">Buildings</a></li>
+    {%endif%}
+    </ul>
