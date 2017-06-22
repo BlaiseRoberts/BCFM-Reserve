@@ -62,6 +62,7 @@ class SpaceType (models.Model):
 	This class models the profile table in the database.
 	----Fields----
 	- label = string that represents the Type
+	- monthly = boolean to show if a Type if for monthly or daily
 	----Methods----
 	Author: Blaise Roberts
 	"""
@@ -90,10 +91,14 @@ class Building (models.Model):
 	This class models the profile table in the database.
 	----Fields----
 	- title = string that is the title of the building
-	- vacancy_status(foreign key) = links to VacancyStatus with a foregin key
-	- description = string that is the description of the building
+	- space_type(foreign key) = links to SpaceType with a foreign key
+	- vacancy_status(foreign key) = links to VacancyStatus with a foreign key
+	- space = string that is the space of the building
+	- parking(foreign key) = links to Parking with a foreign key
+	- weekly_access(Boolean) = true if buiding can be accessed during weekdays
+	- price = int of the price per month
+	- deposit = int of the price for deposit
 	- contact_list(ManyToMany) = links to Users
-	- open_access(Boolean) = true if buiding can be accessed during weekdays
 	----Methods----
 	Author: Blaise Roberts
 	"""
@@ -123,6 +128,7 @@ class Space (models.Model):
 	- tables = # of tables
 	- space(string) = ammount of space ('10x10')
 	- parking(string) = description of parking ('parking for 1 vehicle')
+	- price = int of the price per day
 	- likes(ManytoMany): stores User Instances
     - dislikes(ManytoMany): stores User Instances
 	----Methods----
@@ -146,6 +152,12 @@ class Reservation (models.Model):
 	"""
 	This class models the reservation table in the database
 	----Fields----
+	- customer(foreign key) = links to User with a foregin key
+	- space = string that is the space of the building
+	- date = date in the format 'YYYY-MM-DD'
+	- reservation_type(foreign key) = links to ReservationType with a foregin key
+	- hold_name = string that is the hold name for an in person transaction. (nullable)
+
 	----Methods----
 	Author: Blaise Roberts
 	"""
