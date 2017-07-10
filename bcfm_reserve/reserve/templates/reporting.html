@@ -18,7 +18,9 @@
 
     <div class="card-panel teal lighten-3 center-align">
         {%if date%}
-        <p class="flow-text">Occupancy for {{date}}</p>
+        <h3>Results for {{date}}</h3>
+        <h5>Total Sales:  ${{total_paid}}</h5>
+        <p class="flow-text">Occupancy</p>
         <canvas class="x_canvas" height="300" width="500"></canvas>
         <p class="flow-text">Reservation Types for {{date}}</p>
         <div class="y_canvas" style="height:25rem;"></div>

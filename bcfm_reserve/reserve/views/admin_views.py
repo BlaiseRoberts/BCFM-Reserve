@@ -266,28 +266,37 @@ def reporting(request, date=None):
 	cancelled_count = 0
 	paid_count = 0
 	confirmed_count = 0
+	total_paid = 0
 	for space in all_spaces:
 		reservations = space.reservations.filter(date=date, reservation_type_id__in=[1,2,3,4])
 		if reservations:
 			occupied_count += 1
+			#Reserved
 			if reservations[0].reservation_type.pk == 1:
 				reserved_count +=1
+			#Cancelled
 			if reservations[0].reservation_type.pk == 2:
 				cancelled_count +=1
 				open_space_count += 1
+			#Paid
 			if reservations[0].reservation_type.pk == 3:
 				paid_count +=1
+				total_paid += reservations[0].space.price
+			#Confirmed
 			if reservations[0].reservation_type.pk == 4:
 				confirmed_count +=1	
 		else:
 			open_space_count += 1
+
+
 
 	template_name = 'reporting.html'
 
 	return render(request, template_name, {'occupied_count':occupied_count,
 		'open_space_count':open_space_count,'date':date, 
 		'reserved_count':reserved_count, 'cancelled_count':cancelled_count,
-		'paid_count':paid_count, 'confirmed_count':confirmed_count})
+		'paid_count':paid_count, 'confirmed_count':confirmed_count,
+		'total_paid': total_paid})
 
 
 
