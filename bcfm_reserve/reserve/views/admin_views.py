@@ -284,7 +284,8 @@ def reporting(request, date=None):
 				total_paid += reservations[0].space.price
 			#Confirmed
 			if reservations[0].reservation_type.pk == 4:
-				confirmed_count +=1	
+				confirmed_count +=1
+				total_paid += reservations[0].space.price
 		else:
 			open_space_count += 1
 
