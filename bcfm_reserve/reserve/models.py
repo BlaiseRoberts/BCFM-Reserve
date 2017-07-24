@@ -172,4 +172,4 @@ class Reservation (models.Model):
 	hold_name = models.CharField(max_length=30, blank=True, null=True)
 
 	def __str__(self):
-		return "{} {} by {} {}".format(self.space, self.reservation_type, self.customer.first_name, self.customer.last_name, self.date)
+		return "{} {} by {} {}".format(self.space, self.reservation_type, self.customer.first_name, self.customer.last_name, self.reservation_date)

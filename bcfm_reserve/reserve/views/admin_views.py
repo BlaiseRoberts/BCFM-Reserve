@@ -267,6 +267,13 @@ def reporting(request, date=None):
 						days_ahead += 7
 					next_date = date_today+datetime.timedelta(days=days_ahead)
 					date = str(next_date)[:10]
+
+	#get total paid
+	total_paid = 0
+	reservations_paid = Reservation.objects.filter(paid_date=date)
+	for reservation in reservations_paid:
+		total_paid += reservation.space.price
+
 	all_spaces = Space.objects.all()
 	open_space_count = 0
 	occupied_count = 0
@@ -274,28 +281,40 @@ def reporting(request, date=None):
 	cancelled_count = 0
 	paid_count = 0
 	confirmed_count = 0
-	total_paid = 0
+	day_payout = 0
+
 	for space in all_spaces:
 		reservations = space.reservations.filter(reservation_date=date, reservation_type_id__in=[1,2,3,4])
 		if reservations:
-			occupied_count += 1
-			#Reserved
-			if reservations[0].reservation_type.pk == 1:
-				reserved_count +=1
-			#Cancelled
-			if reservations[0].reservation_type.pk == 2:
+			current_reservation = {}
+			for reservation in reservations:
+				if reservation.reservation_type.pk == 2:
+					pass
+				else:
+					current_reservation = reservation
+			try:
+				#Reserved
+				if current_reservation.reservation_type.pk == 1:
+					reserved_count +=1
+					occupied_count += 1
+				#Paid
+				if current_reservation.reservation_type.pk == 3:
+					occupied_count += 1
+					paid_count +=1
+					day_payout += current_reservation.space.price
+					
+				#Confirmed
+				if current_reservation.reservation_type.pk == 4:
+					occupied_count += 1
+					confirmed_count +=1
+					day_payout += current_reservation.space.price
+			except AttributeError:
+				#Cancelled
 				cancelled_count +=1
 				open_space_count += 1
-			#Paid
-			if reservations[0].reservation_type.pk == 3:
-				paid_count +=1
-				total_paid += reservations[0].space.price
-			#Confirmed
-			if reservations[0].reservation_type.pk == 4:
-				confirmed_count +=1
-				total_paid += reservations[0].space.price
 		else:
 			open_space_count += 1
+	occupied_rate = round(occupied_count/(occupied_count+open_space_count),2)
 
 
 
@@ -305,7 +324,8 @@ def reporting(request, date=None):
 		'open_space_count':open_space_count,'date':date, 
 		'reserved_count':reserved_count, 'cancelled_count':cancelled_count,
 		'paid_count':paid_count, 'confirmed_count':confirmed_count,
-		'total_paid': total_paid})
+		'total_paid': total_paid, 'day_payout':day_payout, 
+		'occupied_rate':occupied_rate})
 
 
 
