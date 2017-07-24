@@ -188,7 +188,7 @@ def admin_reservation(request):
 		users = User.objects.filter(is_staff=True)
 		reservations= []
 		for user in users:
-			user_reservations = Reservation.objects.filter(customer=user).order_by('-date')[:20]
+			user_reservations = Reservation.objects.filter(customer=user).order_by('-creation_date')[:20]
 			for reservation in user_reservations:
 				reservations.append(reservation)
 		template_name = 'staff.html'
