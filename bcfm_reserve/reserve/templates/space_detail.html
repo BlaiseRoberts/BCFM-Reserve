@@ -84,7 +84,12 @@
 		  	<form method="POST" action= "">
                 {% csrf_token %}
                 {%if user.is_staff%}
-                	{%if space.status.reservation_type != "Open"%}
+                	{%if space.status.reservation_type.pk == 3 or space.status.reservation_type.pk == 4%}
+                	<div class="left-align">
+	                    <input class="btn red darken-2" name="cancel_confirm_button" type="submit" value="Cancel">
+	                </div>
+	                {%endif%}
+	                {%if space.status.reservation_type.pk == 1%}
                 	<div class="left-align">
 	                    <input class="btn blue darken-2" name="cancel_confirm_button" type="submit" value="Confirm" style="margin-right:5px">
 	                    <input class="btn red darken-2" name="cancel_confirm_button" type="submit" value="Cancel">

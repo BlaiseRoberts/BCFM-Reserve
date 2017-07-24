@@ -20,19 +20,19 @@
 				      <h3 class="modal-header">Cancel Reservation {{reservaion.space.title}}</h3>
 				      <div class="row">
 						<div class="input-field col s12">
-							<p class="flow-text">Are you sure you would like to cancel your reservation for {{reservation.space.title}} on {{reservation.date}}?</p>
+							<p class="flow-text">Are you sure you would like to cancel your reservation for {{reservation.space.title}} on {{reservation.reservation_date}}?</p>
 						</div>
 				      </div>	
 				    </div>
 					<div class="modal-footer">
-						<a href="{% url 'reserve:delete_reservation' reservation.id reservation.date %}" class="btn red darken-2 modal-action modal-close waves-effect waves-light">Cancel Reservation</a>
+						<a href="{% url 'reserve:delete_reservation' reservation.id reservation.reservation_date %}" class="btn red darken-2 modal-action modal-close waves-effect waves-light">Cancel Reservation</a>
 					</div>
 				  </div>
 
 
 		        	<li class="collection-item"><a href="
-		        	{% url 'reserve:space' reservation.space.id reservation.date %}
-		        	">{{reservation.reservation_type}} {{reservation.space}} on {{reservation.date}}</a>
+		        	{% url 'reserve:space' reservation.space.id reservation.reservation_date %}
+		        	">{{reservation.reservation_type}} {{reservation.space}} on {{reservation.reservation_date}}</a>
 		        	<a href="#reservationModal{{reservation.id}}" class="secondary-content modal-trigger waves-effect waves-light"><i class="material-icons red-text text-darken-2">delete</i></a>
 		        	</li>
 		        {%endfor%}

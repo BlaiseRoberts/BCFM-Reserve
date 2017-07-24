@@ -42,8 +42,8 @@ def index(request):
 	next_date = date_today+datetime.timedelta(days=days_ahead)
 
 	for space in liked_spaces:
-		print(space.reservations.filter(date=str(next_date)[:10],reservation_type__in=[1,3,4]).count())
-		if space.reservations.filter(date=str(next_date)[:10],reservation_type__in=[1,3,4]).count() == 0:
+		print(space.reservations.filter(reservation_date=str(next_date)[:10],reservation_type__in=[1,3,4]).count())
+		if space.reservations.filter(reservation_date=str(next_date)[:10],reservation_type__in=[1,3,4]).count() == 0:
 			recommended_spaces.append(space)
 			space_types.add(space.space_type)
 
@@ -200,7 +200,7 @@ def browse(request, date=None):
 						return render(request, template_name, {'error':error, 
 							'error_details':error_details})
 		for space in all_spaces:
-			reservations = space.reservations.filter(date=date, reservation_type_id__in=[1,3,4])
+			reservations = space.reservations.filter(reservation_date=date, reservation_type_id__in=[1,3,4])
 			if reservations:
 				status = reservations[0]
 				space.status = status
@@ -248,30 +248,49 @@ def space_details(request, space_id, date):
 			space.dislikes.add(request.user)
 			return HttpResponseRedirect(reverse('reserve:space', 
 	                args=[space.id, date]))
-
+		#Grab the Reserved Type
 		reservation_type = ReservationType.objects.get(pk=1)
-		total_reservations = Reservation.objects.filter(customer=request.user, date=date).count()
+
+		#Check for max reservation #
+		total_reservations = Reservation.objects.filter(customer=request.user, 
+			reservation_date=date).count()
 		if total_reservations < 6:
-			try:
-				r = Reservation.objects.get(space_id=space_id, date=date, customer=request.user)
-				r.reservation_type = reservation_type
-				r.save()
-				space.dislikes.clear()
-				space.likes.add(request.user)
-				return HttpResponseRedirect(reverse('reserve:space', 
-		                args=[r.space.id, date]))
-			except:
-				r = Reservation(
-					customer = request.user
-				)
-				r.space = space
-				r.date = date
-				r.reservation_type = reservation_type
-				r.save()
-				space.dislikes.clear()
-				space.likes.add(request.user)
-				return HttpResponseRedirect(reverse('reserve:space', 
-		                args=[r.space.id, date]))
+			#Check for other reservations
+			previous_reservations = Reservation.objects.filter(
+				space_id=space_id, reservation_date=date,
+				reservation_type_id__in=[1,3,4])
+			if previous_reservations:
+				error = "This has been reserved."
+				error_details = "Unfortunatly this space has been reserved.\
+					Check for other spaces in this barn or try another date."
+				template_name = 'error.html'
+
+				return render(request, template_name, {'error':error, 
+					'error_details':error_details})
+			else:
+				try:
+					r = Reservation.objects.get(space_id=space_id, 
+						reservation_date=date, customer=request.user)
+					r.reservation_type = reservation_type
+					r.creation_date = datetime.date.today()
+					r.save()
+					space.dislikes.clear()
+					space.likes.add(request.user)
+					return HttpResponseRedirect(reverse('reserve:space', 
+			                args=[r.space.id, date]))
+				except:
+					r = Reservation(
+						customer = request.user
+					)
+					r.space = space
+					r.reservation_date = date
+					r.creation_date = datetime.date.today()
+					r.reservation_type = reservation_type
+					r.save()
+					space.dislikes.clear()
+					space.likes.add(request.user)
+					return HttpResponseRedirect(reverse('reserve:space', 
+			                args=[r.space.id, date]))
 		else:
 			error = "Too Many Reservations"
 			error_details = "You can cancel a different reservation on this\
@@ -285,7 +304,7 @@ def space_details(request, space_id, date):
 	elif request.method == 'GET':
 		try:
 			space = Space.objects.get(pk=space_id)
-			reservations = space.reservations.filter(date=date, reservation_type_id__in=[1,3,4])
+			reservations = space.reservations.filter(reservation_date=date, reservation_type_id__in=[1,3,4])
 			if reservations:
 				status = reservations[0]
 				space.status = status
@@ -399,7 +418,7 @@ def reservation(request, user_id):
     Author: Blaise Roberts
     """
 	if request.method == 'GET':
-		reservations = Reservation.objects.filter(customer_id=user_id).order_by('-date')[:12]
+		reservations = Reservation.objects.filter(customer_id=user_id).order_by('-reservation_date')[:12]
 		template_name = 'reservation.html'
 		return render(request, template_name, {'reservations':reservations})
 
@@ -414,7 +433,7 @@ def delete_reservation(request, reservation_id, date):
     
     Author: Blaise Roberts
     """
-	r = Reservation.objects.get(pk=reservation_id, date=date)
+	r = Reservation.objects.get(pk=reservation_id, reservation_date=date)
 	reservation_type = ReservationType.objects.get(pk=2)
 	if request.user == r.customer:
 		r.reservation_type = reservation_type

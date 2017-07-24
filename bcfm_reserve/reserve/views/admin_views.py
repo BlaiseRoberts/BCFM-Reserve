@@ -44,16 +44,18 @@ def admin_space_details(request, space_id, date):
 
 		if cancel_confirm_button == "Cancel":
 			reservation_type = ReservationType.objects.get(pk=2)
-			r = space.reservations.filter(date=date).latest('pk')
+			r = space.reservations.filter(reservation_date=date, reservation_type_id__in=[1,3,4]).latest('pk')
 			r.reservation_type = reservation_type
+			r.paid_date = None
 			r.save()
 			return HttpResponseRedirect(reverse('reserve:admin_space', 
 	                args=[r.space.id, date]))
 
 		if cancel_confirm_button == "Confirm":
 			reservation_type = ReservationType.objects.get(pk=4)
-			r = space.reservations.filter(date=date).latest('pk')
+			r = space.reservations.filter(reservation_date=date, reservation_type_id=1).latest('pk')
 			r.reservation_type = reservation_type
+			r.paid_date = datetime.date.today()
 			r.save()
 			return HttpResponseRedirect(reverse('reserve:admin_space', 
 	                args=[r.space.id, date]))
@@ -63,9 +65,12 @@ def admin_space_details(request, space_id, date):
 			reservation_type = ReservationType.objects.get(pk=1)
 		try:
 			if reservation_form.is_valid():
-				r = Reservation.objects.get(space_id=space_id, date=date, customer=request.user)
+				r = Reservation.objects.get(space_id=space_id, 
+					reservation_date=date, 
+					hold_name=reservation_form.cleaned_data['hold_name'])
 				r.reservation_type = reservation_type
-				r.hold_name = reservation_form.cleaned_data['hold_name']
+				if r.reservation_type.pk == 3:
+					r.paid_date = datetime.date.today()
 				r.save()
 				return HttpResponseRedirect(reverse('reserve:admin_space', 
 		                args=[r.space.id, date]))
@@ -76,8 +81,11 @@ def admin_space_details(request, space_id, date):
 				)
 				r.hold_name = reservation_form.cleaned_data['hold_name']
 				r.space = space
-				r.date = date
+				r.reservation_date = date
 				r.reservation_type = reservation_type
+				r.creation_date = datetime.date.today()
+				if r.reservation_type.pk == 3:
+					r.paid_date = datetime.date.today()
 				r.save()
 				return HttpResponseRedirect(reverse('reserve:admin_space', 
 		                args=[r.space.id, date]))
@@ -87,7 +95,7 @@ def admin_space_details(request, space_id, date):
 		try:
 			reservation_form = ReservationForm()
 			space = Space.objects.get(pk=space_id)
-			reservations = space.reservations.filter(date=date, reservation_type_id__in=[1,3,4]).order_by('-pk')
+			reservations = space.reservations.filter(reservation_date=date, reservation_type_id__in=[1,3,4]).order_by('-pk')
 			if reservations:
 				status = reservations[0]
 				space.status = status
@@ -268,7 +276,7 @@ def reporting(request, date=None):
 	confirmed_count = 0
 	total_paid = 0
 	for space in all_spaces:
-		reservations = space.reservations.filter(date=date, reservation_type_id__in=[1,2,3,4])
+		reservations = space.reservations.filter(reservation_date=date, reservation_type_id__in=[1,2,3,4])
 		if reservations:
 			occupied_count += 1
 			#Reserved

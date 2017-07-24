@@ -165,7 +165,9 @@ class Reservation (models.Model):
         on_delete=models.CASCADE, related_name="reservations")
 	space = models.ForeignKey(Space, 
         on_delete=models.CASCADE, related_name="reservations")
-	date = models.DateField()
+	reservation_date = models.DateField()
+	creation_date = models.DateField()
+	paid_date = models.DateField(blank=True, null=True)
 	reservation_type = models.ForeignKey(ReservationType, related_name='reservations')
 	hold_name = models.CharField(max_length=30, blank=True, null=True)
 
