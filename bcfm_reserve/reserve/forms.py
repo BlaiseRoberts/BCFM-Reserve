@@ -90,7 +90,7 @@ class ProductTypeForm(forms.ModelForm):
     - hold_name
     Author: Blaise Roberts
     """
-
+    
     class Meta:
         model = Reservation
         fields = ('product_types',)

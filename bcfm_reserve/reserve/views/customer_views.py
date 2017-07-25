@@ -323,7 +323,7 @@ def space_details(request, space_id, date):
 			if request.user in dislikes_list:
 				user_disliked = True
 			#Get ProductTypeForm
-			product_type_form = ProductTypeForm()
+			product_type_form = ProductTypeForm(auto_id=False)
 
 			template_name = 'space_detail.html'
 
