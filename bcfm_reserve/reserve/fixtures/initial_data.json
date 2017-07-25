@@ -28,6 +28,90 @@
   }
 },
 {
+  "model": "reserve.producttype",
+  "pk": 1,
+  "fields": {
+    "label": "Garage Sale"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 2,
+  "fields": {
+    "label": "Books & Audible"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 3,
+  "fields": {
+    "label": "Movies, Music, & Games"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 4,
+  "fields": {
+    "label": "Electronics & Computers"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 5,
+  "fields": {
+    "label": "Garden & Tools"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 6,
+  "fields": {
+    "label": "Beauty & Health"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 7,
+  "fields": {
+    "label": "Toys, Kids, & Baby"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 8,
+  "fields": {
+    "label": "Clothing, Shoes, & Jewelry"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 9,
+  "fields": {
+    "label": "Handmade"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 10,
+  "fields": {
+    "label": "Sports & Outdoor"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 11,
+  "fields": {
+    "label": "Automotive & Industrial"
+  }
+},
+{
+  "model": "reserve.producttype",
+  "pk": 12,
+  "fields": {
+    "label": "Pets & Animals"
+  }
+},
+{
   "model": "reserve.vacancystatus",
   "pk": 1,
   "fields": {

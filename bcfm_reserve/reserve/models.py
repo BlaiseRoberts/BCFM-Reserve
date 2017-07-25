@@ -73,6 +73,20 @@ class SpaceType (models.Model):
 	def __str__(self):
 		return self.label
 
+class ProductType (models.Model):
+	"""
+	This class models the profile table in the database.
+	----Fields----
+	- label = string that represents the Type
+	----Methods----
+	Author: Blaise Roberts
+	"""
+	label = models.CharField(max_length=50)
+
+
+	def __str__(self):
+		return self.label
+
 class Parking (models.Model):
 	"""
 	This class models the profile table in the database.
@@ -113,7 +127,7 @@ class Building (models.Model):
 	weekly_access = models.BooleanField()
 	price = models.IntegerField()
 	deposit = models.IntegerField()
-	contact_list = models.ManyToManyField(User, related_name='building_requests')
+	contact_list = models.ManyToManyField(User, related_name='building_requests', blank=True)
 
 
 	def __str__(self):
@@ -142,8 +156,8 @@ class Space (models.Model):
 	parking = models.ForeignKey(Parking, 
         on_delete=models.CASCADE, related_name="spaces")
 	price = models.IntegerField(default=10)
-	likes = models.ManyToManyField(User, related_name='likes')
-	dislikes = models.ManyToManyField(User, related_name='dislikes')
+	likes = models.ManyToManyField(User, related_name='likes', blank=True)
+	dislikes = models.ManyToManyField(User, related_name='dislikes', blank=True)
 
 	def __str__(self):
 		return self.title
@@ -154,9 +168,12 @@ class Reservation (models.Model):
 	----Fields----
 	- customer(foreign key) = links to User with a foregin key
 	- space = string that is the space of the building
-	- date = date in the format 'YYYY-MM-DD'
+	- reservation_date = date in the format 'YYYY-MM-DD'
+	- creation_date = date in the format 'YYYY-MM-DD'
+	- paid_date = date in the format 'YYYY-MM-DD'
 	- reservation_type(foreign key) = links to ReservationType with a foregin key
 	- hold_name = string that is the hold name for an in person transaction. (nullable)
+	- product_types(ManytoMany): stores ProductType Instances
 
 	----Methods----
 	Author: Blaise Roberts
