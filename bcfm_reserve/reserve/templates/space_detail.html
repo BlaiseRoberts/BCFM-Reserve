@@ -12,7 +12,7 @@
   	  </div>	
 		<form method="POST" action= "">
 		  {% csrf_token %}
-		  {{reservation_form.as_p}}
+		  {{hold_name_form.as_p}}
 		  <div class="center-align">
 		  <input class="btn teal darken-2 modal-action modal-close" name="pay_reserve_button" type="submit" value="Pay"/>
 		  <input class="btn blue darken-2 modal-action modal-close" name="pay_reserve_button" type="submit" value="Reserve">
@@ -21,13 +21,16 @@
 	</div>
 </div>
 			{%else%}
-			<p class="flow-text">Are you sure you would like to reserve {{space.title}} on {{date}}?  (You reservation will be held untill 9am on the date of your reservation)</p>
+			<form method="POST" action= "">
+			{% csrf_token %}
+			<p class="flow-text">What kinds of products are you selling?</p>
+			{{product_type_form.as_p}}
+			
 		</div>
       </div>	
     </div>
 	<div class="modal-footer">
-		<form method="POST" action= "">
-		  {% csrf_token %}
+		  <p>Are you sure you would like to reserve {{space.title}} on {{date}}?  (You reservation will be held untill 9am on the date of your reservation)</p>
 		  <div class="center-align">
 		  <input class="btn btn-flat modal-action modal-close" type="submit" value="Confirm"/>
 		  </div>

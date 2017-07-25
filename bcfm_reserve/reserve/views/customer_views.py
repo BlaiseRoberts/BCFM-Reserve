@@ -6,9 +6,10 @@ from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-from reserve.forms import UserForm, LoginForm, ProfileForm, EditUserForm
+from reserve.forms import UserForm, LoginForm, ProfileForm, EditUserForm,\
+	ProductTypeForm
 from reserve.models import Reservation, Space, Building, SpaceType,\
-	ReservationType, VacancyStatus, Parking, Profile
+	ReservationType, VacancyStatus, Parking, Profile, ProductType
 
 import datetime
 import pytz
@@ -303,13 +304,16 @@ def space_details(request, space_id, date):
 
 	elif request.method == 'GET':
 		try:
+			#Get Space
 			space = Space.objects.get(pk=space_id)
+			#Check for Reservations and Assign Status Open if Cancelled
 			reservations = space.reservations.filter(reservation_date=date, reservation_type_id__in=[1,3,4])
 			if reservations:
 				status = reservations[0]
 				space.status = status
 			else:
 				space.status = {'reservation_type':'Open'}
+			#Check if space is Liked/Disliked
 			user_liked = False
 			user_disliked = False
 			likes_list = space.likes.all()
@@ -318,11 +322,14 @@ def space_details(request, space_id, date):
 				user_liked = True
 			if request.user in dislikes_list:
 				user_disliked = True
+			#Get ProductTypeForm
+			product_type_form = ProductTypeForm()
 
 			template_name = 'space_detail.html'
 
 			return render(request, template_name, {'space':space, 'date':date,
-				'user_liked':user_liked, 'user_disliked':user_disliked})
+				'user_liked':user_liked, 'user_disliked':user_disliked,
+				'product_type_form':product_type_form})
 		except:
 			error = "Space does not Exist"
 			error_details = "You're searching for a space that doesn't exist."
