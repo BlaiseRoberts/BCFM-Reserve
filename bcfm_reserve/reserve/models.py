@@ -187,6 +187,7 @@ class Reservation (models.Model):
 	paid_date = models.DateField(blank=True, null=True)
 	reservation_type = models.ForeignKey(ReservationType, related_name='reservations')
 	hold_name = models.CharField(max_length=30, blank=True, null=True)
+	product_types = models.ManyToManyField(ProductType, related_name='reservations', blank=True)
 
 	def __str__(self):
 		return "{} {} by {} {}".format(self.space, self.reservation_type, self.customer.first_name, self.customer.last_name, self.reservation_date)
