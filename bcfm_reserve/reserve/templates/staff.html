@@ -11,7 +11,9 @@
 		<p class="flow-text center-align">All Reservations</p>
 			<ul class="collection">
 				{%for reservation in reservations%}				
-		        	<li class="collection-item"><a href="{% url 'reserve:admin_space' reservation.space.id reservation.reservation_date %}">{{reservation.reservation_type}} {{reservation.space}} for {{reservation.date}} by {{reservation.customer}}</a>
+		        	<li class="collection-item"><a href="{% url 'reserve:admin_space' reservation.space.id reservation.reservation_date %}">{{reservation.customer}} {{reservation.reservation_type}} {{reservation.space}} for {{reservation.hold_name}} on {{reservation.reservation_date}}.
+					<br>
+		        	<i>Created {{reservation.creation_date}}</i></a>
 		        	</li>
 		        {%endfor%}
 	      	</ul>
