@@ -59,6 +59,12 @@ def admin_space_details(request, space_id, date):
 			r.save()
 			return HttpResponseRedirect(reverse('reserve:admin_space', 
 	                args=[r.space.id, date]))
+
+		if cancel_confirm_button == "Permanent":
+			pass
+
+
+		# Create Reservation with Pay or Reserve	
 		if pay_reserve_button == "Pay":
 			reservation_type = ReservationType.objects.get(pk=3)
 		if pay_reserve_button == "Reserve":
