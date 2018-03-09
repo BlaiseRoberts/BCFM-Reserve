@@ -71,7 +71,7 @@ class LoginForm(forms.ModelForm):
         }
         fields = ('username', 'password',)
 
-class ReservationForm(forms.ModelForm):
+class HoldNameForm(forms.ModelForm):
     """
     This class represents an HTML form to add a hold_name to a reservation.
     ----Fields----
@@ -82,4 +82,16 @@ class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
         fields = ('hold_name',)
+
+class ProductTypeForm(forms.ModelForm):
+    """
+    This class represents an HTML form to add a hold_name to a reservation.
+    ----Fields----
+    - hold_name
+    Author: Blaise Roberts
+    """
+    
+    class Meta:
+        model = Reservation
+        fields = ('product_types',)
         

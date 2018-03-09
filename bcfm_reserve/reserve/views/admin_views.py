@@ -9,7 +9,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 from reserve.forms import UserForm, LoginForm, ProfileForm, EditUserForm,\
-	ReservationForm
+	HoldNameForm
 from reserve.models import Reservation, Space, Building, SpaceType,\
 	ReservationType, VacancyStatus, Parking, Profile
 from django.contrib.auth.models import User
@@ -36,7 +36,7 @@ def admin_space_details(request, space_id, date):
     Author: Blaise Roberts
     """
 	if request.method == 'POST':
-		reservation_form = ReservationForm(request.POST)
+		hold_name_form = HoldNameForm(request.POST)
 		space = Space.objects.get(pk=space_id)
 
 		cancel_confirm_button = request.POST.get("cancel_confirm_button", "")
@@ -64,10 +64,10 @@ def admin_space_details(request, space_id, date):
 		if pay_reserve_button == "Reserve":
 			reservation_type = ReservationType.objects.get(pk=1)
 		try:
-			if reservation_form.is_valid():
+			if hold_name_form.is_valid():
 				r = Reservation.objects.get(space_id=space_id, 
 					reservation_date=date, 
-					hold_name=reservation_form.cleaned_data['hold_name'])
+					hold_name=hold_name_form.cleaned_data['hold_name'])
 				r.reservation_type = reservation_type
 				if r.reservation_type.pk == 3:
 					r.paid_date = datetime.date.today()
@@ -75,11 +75,11 @@ def admin_space_details(request, space_id, date):
 				return HttpResponseRedirect(reverse('reserve:admin_space', 
 		                args=[r.space.id, date]))
 		except:
-			if reservation_form.is_valid():
+			if hold_name_form.is_valid():
 				r = Reservation(
 					customer = request.user 
 				)
-				r.hold_name = reservation_form.cleaned_data['hold_name']
+				r.hold_name = hold_name_form.cleaned_data['hold_name']
 				r.space = space
 				r.reservation_date = date
 				r.reservation_type = reservation_type
@@ -93,7 +93,7 @@ def admin_space_details(request, space_id, date):
 		
 	elif request.method == 'GET':
 		try:
-			reservation_form = ReservationForm()
+			hold_name_form = HoldNameForm()
 			space = Space.objects.get(pk=space_id)
 			reservations = space.reservations.filter(reservation_date=date, reservation_type_id__in=[1,3,4]).order_by('-pk')
 			if reservations:
@@ -105,7 +105,7 @@ def admin_space_details(request, space_id, date):
 			template_name = 'space_detail.html'
 
 			return render(request, template_name, {'space':space, 'date':date,
-				'reservation_form':reservation_form})
+				'hold_name_form':hold_name_form})
 		except:
 			error = "Space does not Exist"
 			error_details = "You're searching for a space that doesn't exist."
